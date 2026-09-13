@@ -1,487 +1,348 @@
-let complaints = [];
-
-
-/* BACKEND URL */
-
 const API_URL = "https://civicfix-backend-ef93.onrender.com";
 
-
-/* DEPARTMENT MAPPING */
-
-const departments = {
-
+const departmentMap = {
     "Road Damage": "Engineering Department",
-
     "Drainage Leakage": "Drainage Department",
-
     "Garbage Dump": "Sanitation Department",
-
     "Waterlogging": "Drainage Department",
-
     "Street Light Problem": "Electrical Department",
-
-    "Public Toilet - No Water":
-        "Water Supply Department",
-
-    "Public Toilet - No Electricity":
-        "Electrical Department",
-
-    "Public Toilet - Blockage":
-        "Sanitation Department",
-
-    "Unclean Public Toilet":
-        "Sanitation Department",
-
-    "Open Manhole":
-        "Drainage Department",
-
-    "Dead Animal Removal":
-        "Sanitation Department"
+    "Public Toilet - No Water": "Water Supply Department",
+    "Public Toilet - No Electricity": "Electrical Department",
+    "Public Toilet - Blockage": "Sanitation Department",
+    "Unclean Public Toilet": "Sanitation Department",
+    "Open Manhole": "Drainage Department",
+    "Dead Animal Removal": "Sanitation Department"
 };
 
 
-/* GET LOCATION */
+// ================================
+// REPORT COMPLAINT
+// ================================
 
-function getLocation() {
+const complaintForm = document.getElementById("complaintForm");
 
-    if (!navigator.geolocation) {
+if (complaintForm) {
 
-        alert("Location is not supported by your browser.");
-        return;
+    const categorySelect = document.getElementById("category");
+    const departmentInput = document.getElementById("department");
+
+    if (categorySelect && departmentInput) {
+
+        categorySelect.addEventListener("change", function () {
+
+            const selectedCategory = categorySelect.value;
+
+            departmentInput.value =
+                departmentMap[selectedCategory] || "";
+
+        });
     }
 
-    navigator.geolocation.getCurrentPosition(
 
-        function(position) {
+    complaintForm.addEventListener("submit", async function (event) {
 
-            let latitude =
-                position.coords.latitude;
+        event.preventDefault();
 
-            let longitude =
-                position.coords.longitude;
+        const category = document.getElementById("category").value;
+        const location = document.getElementById("location").value;
+        const description = document.getElementById("description").value;
 
-            document.getElementById("location").value =
-                latitude + ", " + longitude;
-        },
-
-        function() {
-
-            alert("Unable to get your location.");
+        if (!category || !location || !description) {
+            alert("Please fill all required fields.");
+            return;
         }
-    );
-}
 
+        const formData = new FormData();
 
-/* SUBMIT COMPLAINT */
+        formData.append("category", category);
+        formData.append("location", location);
+        formData.append("description", description);
 
-async function submitComplaint() {
+        try {
 
-    console.log("Connecting to online backend...");
-
-
-    let category =
-        document.getElementById("category").value;
-
-    let location =
-        document.getElementById("location").value;
-
-    let description =
-        document.getElementById("description").value;
-
-    let photo =
-        document.getElementById("photo").files[0];
-
-
-    if (
-        category === "" ||
-        location === "" ||
-        description === ""
-    ) {
-
-        alert("Please fill all required fields.");
-        return;
-    }
-
-
-    let formData = new FormData();
-
-    formData.append("category", category);
-    formData.append("location", location);
-    formData.append("description", description);
-
-
-    try {
-
-        let response =
-            await fetch(
-                API_URL + "/complaints",
+            const response = await fetch(
+                `${API_URL}/complaints`,
                 {
                     method: "POST",
                     body: formData
                 }
             );
 
+            const data = await response.json();
 
-        if (!response.ok) {
+            if (response.ok) {
 
-            throw new Error(
-                "Backend request failed"
+                alert(
+                    "Complaint submitted successfully!\nComplaint ID: CIV-" +
+                    data.complaint_id
+                );
+
+                complaintForm.reset();
+
+                if (departmentInput) {
+                    departmentInput.value = "";
+                }
+
+            } else {
+
+                alert("Unable to submit complaint.");
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Backend connection failed. Please try again."
             );
         }
-
-
-        let data =
-            await response.json();
-
-
-        console.log("Backend response:", data);
-
-
-        let id =
-            "CIV-" + data.complaint_id;
-
-
-        let complaint = {
-
-            id: id,
-
-            category: category,
-
-            location: location,
-
-            description: description,
-
-            department:
-                departments[category],
-
-            status: "Pending",
-
-            worker: null,
-
-            after_photo: null,
-
-            date:
-                new Date().toLocaleDateString(),
-
-            photo:
-                photo ? photo.name : "No photo"
-        };
-
-
-        complaints.push(complaint);
-
-
-        document.getElementById(
-            "complaintId"
-        ).innerText = id;
-
-
-        document.getElementById(
-            "successBox"
-        ).style.display = "block";
-
-
-        document.getElementById(
-            "category"
-        ).value = "";
-
-        document.getElementById(
-            "location"
-        ).value = "";
-
-        document.getElementById(
-            "description"
-        ).value = "";
-
-        document.getElementById(
-            "photo"
-        ).value = "";
-
-
-        updateDashboard();
-
-
-        window.location.hash = "track";
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Backend connection failed. Please try again."
-        );
-    }
+    });
 }
 
 
-/* TRACK COMPLAINT */
+// ================================
+// GET CURRENT LOCATION
+// ================================
 
-async function trackComplaint() {
+const locationButton =
+    document.getElementById("getLocation");
 
-    let searchId =
-        document
-            .getElementById("searchId")
-            .value
-            .trim();
+if (locationButton) {
 
+    locationButton.addEventListener("click", function () {
 
-    let result =
-        document.getElementById(
-            "trackingResult"
-        );
+        if (!navigator.geolocation) {
 
-
-    if (searchId === "") {
-
-        result.innerHTML = `
-            <div class="status-card">
-
-                <h3>
-                    ⚠️ Enter Complaint ID
-                </h3>
-
-                <p>
-                    Please enter your Complaint ID.
-                </p>
-
-            </div>
-        `;
-
-        return;
-    }
-
-
-    try {
-
-        let response =
-            await fetch(
-                API_URL + "/complaints"
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to get complaints"
-            );
-        }
-
-
-        let backendComplaints =
-            await response.json();
-
-
-        let complaint =
-            backendComplaints.find(
-                function(item) {
-
-                    return (
-                        "CIV-" + item.id
-                        === searchId
-                    );
-                }
-            );
-
-
-        if (!complaint) {
-
-            result.innerHTML = `
-                <div class="status-card">
-
-                    <h3>
-                        ❌ Complaint Not Found
-                    </h3>
-
-                    <p>
-                        Please check your Complaint ID.
-                    </p>
-
-                </div>
-            `;
-
+            alert("Geolocation is not supported by this browser.");
             return;
         }
 
+        navigator.geolocation.getCurrentPosition(
 
-        let afterPhotoHTML =
-            complaint.after_photo
+            function (position) {
 
-            ? `
-                <div>
+                const latitude =
+                    position.coords.latitude;
 
-                    <strong>
-                        After Work Proof:
-                    </strong>
+                const longitude =
+                    position.coords.longitude;
 
-                    <br><br>
+                const locationInput =
+                    document.getElementById("location");
 
-                    <img
-                        src="${API_URL}/uploads/${encodeURIComponent(complaint.after_photo)}"
-                        alt="After Work Photo"
-                        style="
-                            width:200px;
-                            max-width:100%;
-                            border-radius:10px;
-                            border:1px solid #ddd;
-                        "
-                    >
+                if (locationInput) {
 
-                    <br>
+                    locationInput.value =
+                        `${latitude}, ${longitude}`;
+                }
+            },
 
-                    <small>
-                        ${complaint.after_photo}
-                    </small>
+            function () {
 
-                </div>
-              `
-
-            : `
-                <p>
-                    <strong>
-                        After Work Proof:
-                    </strong>
-
-                    Not Uploaded
-                </p>
-              `;
-
-
-        result.innerHTML = `
-
-            <div class="status-card">
-
-                <h3>
-                    Complaint ID: CIV-${complaint.id}
-                </h3>
-
-                <p>
-                    <strong>Problem:</strong>
-                    ${complaint.category}
-                </p>
-
-                <p>
-                    <strong>Location:</strong>
-                    ${complaint.location}
-                </p>
-
-                <p>
-                    <strong>Department:</strong>
-                    ${departments[complaint.category]}
-                </p>
-
-                <p>
-                    <strong>Description:</strong>
-                    ${complaint.description}
-                </p>
-
-                <p>
-                    <strong>Worker:</strong>
-                    ${complaint.worker || "Not Assigned"}
-                </p>
-
-                <p>
-                    <strong>Status:</strong>
-                    ${complaint.status}
-                </p>
-
-                ${afterPhotoHTML}
-
-                <br>
-
-                <span class="status">
-                    ${complaint.status}
-                </span>
-
-            </div>
-        `;
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        result.innerHTML = `
-            <div class="status-card">
-
-                <h3>
-                    ⚠️ Backend Error
-                </h3>
-
-                <p>
-                    Unable to connect to backend.
-                </p>
-
-            </div>
-        `;
-    }
+                alert(
+                    "Unable to get your current location."
+                );
+            }
+        );
+    });
 }
 
 
-/* UPDATE COMPLAINT STATUS */
+// ================================
+// TRACK COMPLAINT
+// ================================
 
-async function updateStatus(
+const trackForm =
+    document.getElementById("trackForm");
+
+if (trackForm) {
+
+    trackForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            const complaintInput =
+                document.getElementById("complaintId");
+
+            const resultBox =
+                document.getElementById("trackingResult");
+
+            if (!complaintInput || !resultBox) {
+                return;
+            }
+
+            const complaintId =
+                complaintInput.value
+                    .replace("CIV-", "")
+                    .trim();
+
+            if (!complaintId) {
+
+                alert("Please enter a complaint ID.");
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/complaints`
+                    );
+
+                const complaints =
+                    await response.json();
+
+                const complaint =
+                    complaints.find(
+                        item =>
+                            String(item.id) ===
+                            String(complaintId)
+                    );
+
+                if (!complaint) {
+
+                    resultBox.innerHTML = `
+                        <div class="status-card">
+                            <h3>Complaint Not Found</h3>
+                            <p>
+                                Please check your complaint ID.
+                            </p>
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                let photoHTML = "";
+
+                if (complaint.after_photo) {
+
+                    photoHTML = `
+                        <div class="after-photo">
+                            <h4>After-Work Proof</h4>
+
+                            <img
+                                src="${API_URL}/uploads/${encodeURIComponent(
+                                    complaint.after_photo
+                                )}"
+                                alt="After work proof"
+                                style="
+                                    max-width:300px;
+                                    width:100%;
+                                    border-radius:12px;
+                                    margin-top:10px;
+                                "
+                            >
+                        </div>
+                    `;
+                }
+
+                resultBox.innerHTML = `
+
+                    <div class="status-card">
+
+                        <h3>
+                            Complaint CIV-${complaint.id}
+                        </h3>
+
+                        <p>
+                            <strong>Category:</strong>
+                            ${complaint.category}
+                        </p>
+
+                        <p>
+                            <strong>Location:</strong>
+                            ${complaint.location}
+                        </p>
+
+                        <p>
+                            <strong>Description:</strong>
+                            ${complaint.description}
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            ${complaint.status}
+                        </p>
+
+                        <p>
+                            <strong>Worker:</strong>
+                            ${
+                                complaint.worker ||
+                                "Not Assigned"
+                            }
+                        </p>
+
+                        ${photoHTML}
+
+                    </div>
+                `;
+
+            } catch (error) {
+
+                console.error(error);
+
+                resultBox.innerHTML = `
+                    <div class="status-card">
+                        <h3>Connection Error</h3>
+                        <p>
+                            Unable to connect to backend.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+    );
+}
+
+
+// ================================
+// UPDATE COMPLAINT STATUS
+// ================================
+
+async function updateComplaintStatus(
     complaintId,
     newStatus
 ) {
 
-    console.log(
-        "Updating complaint:",
-        complaintId,
-        "New status:",
-        newStatus
-    );
-
-
-    let formData = new FormData();
+    const formData = new FormData();
 
     formData.append(
         "status",
         newStatus
     );
 
-
     try {
 
-        let response =
+        const response =
             await fetch(
-                API_URL +
-                "/complaints/" +
-                complaintId +
-                "/status",
+                `${API_URL}/complaints/${complaintId}/status`,
                 {
                     method: "PUT",
                     body: formData
                 }
             );
 
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Status update failed"
-            );
-        }
-
-
-        let data =
+        const data =
             await response.json();
 
+        if (response.ok) {
 
-        console.log(
-            "Status update response:",
-            data
-        );
+            alert(
+                "Complaint status updated successfully!"
+            );
 
+            updateDashboard();
 
-        alert(
-            "Complaint status updated to " +
-            newStatus
-        );
+        } else {
 
-
-        updateDashboard();
-
+            alert(
+                "Unable to update complaint status."
+            );
+        }
 
     } catch (error) {
 
@@ -494,78 +355,50 @@ async function updateStatus(
 }
 
 
-/* ASSIGN WORKER */
+// ================================
+// ASSIGN WORKER
+// ================================
 
 async function assignWorker(
     complaintId,
-    worker
+    workerName
 ) {
 
-    console.log(
-        "Assigning worker:",
-        worker,
-        "to complaint:",
-        complaintId
-    );
-
-
-    if (worker === "") {
-
-        alert("Please select a worker.");
-        return;
-    }
-
-
-    let formData = new FormData();
+    const formData = new FormData();
 
     formData.append(
         "worker",
-        worker
+        workerName
     );
-
 
     try {
 
-        let response =
+        const response =
             await fetch(
-                API_URL +
-                "/complaints/" +
-                complaintId +
-                "/worker",
+                `${API_URL}/complaints/${complaintId}/worker`,
                 {
                     method: "PUT",
                     body: formData
                 }
             );
 
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Worker assignment failed"
-            );
-        }
-
-
-        let data =
+        const data =
             await response.json();
 
+        if (response.ok) {
 
-        console.log(
-            "Worker assignment response:",
-            data
-        );
+            alert(
+                "Worker assigned successfully!"
+            );
 
+            updateDashboard();
 
-        alert(
-            "Worker " +
-            worker +
-            " assigned successfully!"
-        );
+        } else {
 
-
-        updateDashboard();
-
+            alert(
+                "Unable to assign worker."
+            );
+        }
 
     } catch (error) {
 
@@ -578,379 +411,212 @@ async function assignWorker(
 }
 
 
-/* AFTER WORK PHOTO */
+// ================================
+// UPLOAD AFTER-WORK PHOTO
+// ================================
 
 async function uploadAfterPhoto(
     complaintId,
     file
 ) {
 
-    console.log(
-        "Uploading after-work photo for complaint:",
-        complaintId
-    );
-
-
     if (!file) {
+
+        alert(
+            "Please select an after-work photo."
+        );
 
         return;
     }
 
-
-    let formData = new FormData();
+    const formData = new FormData();
 
     formData.append(
         "photo",
         file
     );
 
-
     try {
 
-        let response =
+        const response =
             await fetch(
-                API_URL +
-                "/complaints/" +
-                complaintId +
-                "/after-photo",
+                `${API_URL}/complaints/${complaintId}/after-photo`,
                 {
                     method: "PUT",
                     body: formData
                 }
             );
 
-
-        if (!response.ok) {
-
-            throw new Error(
-                "After photo upload failed"
-            );
-        }
-
-
-        let data =
+        const data =
             await response.json();
 
+        if (response.ok) {
 
-        console.log(
-            "After photo response:",
-            data
-        );
+            alert(
+                "After-work photo uploaded successfully!"
+            );
 
+            updateDashboard();
 
-        alert(
-            "After-work photo uploaded successfully!"
-        );
+        } else {
 
-
-        updateDashboard();
-
+            alert(
+                "Unable to upload photo."
+            );
+        }
 
     } catch (error) {
 
         console.error(error);
 
         alert(
-            "Unable to upload after-work photo."
+            "Unable to upload photo."
         );
     }
 }
 
 
-/* DASHBOARD */
+// ================================
+// DASHBOARD
+// ================================
 
 async function updateDashboard() {
 
+    const table =
+        document.getElementById(
+            "complaintsTable"
+        );
+
+    if (!table) {
+        return;
+    }
+
     try {
 
-        let response =
+        const response =
             await fetch(
-                API_URL + "/complaints"
+                `${API_URL}/complaints`
             );
 
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to load complaints"
-            );
-        }
-
-
-        let backendComplaints =
+        const complaints =
             await response.json();
-
-
-        complaints =
-            backendComplaints.map(
-                function(c) {
-
-                    return {
-
-                        id:
-                            "CIV-" + c.id,
-
-                        category:
-                            c.category,
-
-                        location:
-                            c.location,
-
-                        description:
-                            c.description,
-
-                        department:
-                            departments[c.category],
-
-                        status:
-                            c.status,
-
-                        worker:
-                            c.worker,
-
-                        after_photo:
-                            c.after_photo,
-
-                        date:
-                            new Date()
-                                .toLocaleDateString(),
-
-                        photo:
-                            "No photo"
-                    };
-                }
-            );
-
-
-        /* STATISTICS */
-
-        let total =
-            complaints.length;
-
-
-        let pending =
-            complaints.filter(
-                c => c.status === "Pending"
-            ).length;
-
-
-        let progress =
-            complaints.filter(
-                c => c.status === "In Progress"
-            ).length;
-
-
-        let completed =
-            complaints.filter(
-                c => c.status === "Completed"
-            ).length;
-
-
-        document.getElementById(
-            "total"
-        ).innerText = total;
-
-
-        document.getElementById(
-            "pending"
-        ).innerText = pending;
-
-
-        document.getElementById(
-            "progress"
-        ).innerText = progress;
-
-
-        document.getElementById(
-            "completed"
-        ).innerText = completed;
-
-
-        /* DASHBOARD TABLE */
-
-        let table =
-            document.getElementById(
-                "complaintTable"
-            );
-
-
-        if (!table) {
-            return;
-        }
-
 
         table.innerHTML = "";
 
+        let total = complaints.length;
+
+        let pending =
+            complaints.filter(
+                item => item.status === "Pending"
+            ).length;
+
+        let inProgress =
+            complaints.filter(
+                item => item.status === "In Progress"
+            ).length;
+
+        let completed =
+            complaints.filter(
+                item => item.status === "Completed"
+            ).length;
+
+
+        const totalElement =
+            document.getElementById("totalComplaints");
+
+        const pendingElement =
+            document.getElementById("pendingComplaints");
+
+        const progressElement =
+            document.getElementById("progressComplaints");
+
+        const completedElement =
+            document.getElementById("completedComplaints");
+
+
+        if (totalElement) {
+            totalElement.textContent = total;
+        }
+
+        if (pendingElement) {
+            pendingElement.textContent = pending;
+        }
+
+        if (progressElement) {
+            progressElement.textContent =
+                inProgress;
+        }
+
+        if (completedElement) {
+            completedElement.textContent =
+                completed;
+        }
+
 
         complaints.forEach(
-            function(c) {
+            function (complaint) {
 
-                let row =
+                const row =
                     document.createElement("tr");
 
+                let photoHTML = "No Photo";
 
-                let numericId =
-                    c.id.replace("CIV-", "");
+                if (complaint.after_photo) {
 
-
-                let afterPhotoHTML =
-                    c.after_photo
-
-                    ? `
-                        <div>
-
-                            <img
-                                src="${API_URL}/uploads/${encodeURIComponent(c.after_photo)}"
-                                alt="After Work Photo"
-                                style="
-                                    width:100px;
-                                    height:80px;
-                                    object-fit:cover;
-                                    border-radius:8px;
-                                    border:1px solid #ddd;
-                                "
-                            >
-
-                            <br>
-
-                            <small>
-                                Uploaded
-                            </small>
-
-                        </div>
-                      `
-
-                    : `
-                        <small>
-                            Not Uploaded
-                        </small>
-                      `;
-
+                    photoHTML = `
+                        <img
+                            src="${API_URL}/uploads/${encodeURIComponent(
+                                complaint.after_photo
+                            )}"
+                            alt="After work"
+                            style="
+                                width:70px;
+                                height:70px;
+                                object-fit:cover;
+                                border-radius:8px;
+                            "
+                        />
+                    `;
+                }
 
                 row.innerHTML = `
 
                     <td>
-                        ${c.id}
+                        CIV-${complaint.id}
                     </td>
 
                     <td>
-                        ${c.category}
+                        ${complaint.category}
                     </td>
 
                     <td>
-                        ${c.location}
+                        ${complaint.location}
                     </td>
 
                     <td>
-                        ${c.department}
+                        ${complaint.status}
                     </td>
 
                     <td>
-                        ${c.status}
+                        ${
+                            complaint.worker ||
+                            "Not Assigned"
+                        }
                     </td>
 
                     <td>
-
-                        <select
-                            onchange="updateStatus(${numericId}, this.value)"
-                        >
-
-                            <option
-                                value="Pending"
-                                ${c.status === "Pending" ? "selected" : ""}
-                            >
-                                Pending
-                            </option>
-
-                            <option
-                                value="In Progress"
-                                ${c.status === "In Progress" ? "selected" : ""}
-                            >
-                                In Progress
-                            </option>
-
-                            <option
-                                value="Completed"
-                                ${c.status === "Completed" ? "selected" : ""}
-                            >
-                                Completed
-                            </option>
-
-                        </select>
-
-                    </td>
-
-                    <td>
-
-                        <select
-                            onchange="assignWorker(${numericId}, this.value)"
-                        >
-
-                            <option value="">
-                                Select Worker
-                            </option>
-
-                            <option
-                                value="Worker 1"
-                                ${c.worker === "Worker 1" ? "selected" : ""}
-                            >
-                                Worker 1
-                            </option>
-
-                            <option
-                                value="Worker 2"
-                                ${c.worker === "Worker 2" ? "selected" : ""}
-                            >
-                                Worker 2
-                            </option>
-
-                            <option
-                                value="Worker 3"
-                                ${c.worker === "Worker 3" ? "selected" : ""}
-                            >
-                                Worker 3
-                            </option>
-
-                            <option
-                                value="Worker 4"
-                                ${c.worker === "Worker 4" ? "selected" : ""}
-                            >
-                                Worker 4
-                            </option>
-
-                        </select>
-
-                    </td>
-
-                    <td>
-
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="uploadAfterPhoto(${numericId}, this.files[0])"
-                        >
-
-                        <br><br>
-
-                        ${afterPhotoHTML}
-
+                        ${photoHTML}
                     </td>
 
                 `;
 
-
                 table.appendChild(row);
-
             }
         );
 
-
     } catch (error) {
 
-        console.error(
-            "Dashboard error:",
-            error
-        );
+        console.error(error);
 
         console.log(
             "Online backend server may not be available."
@@ -959,6 +625,15 @@ async function updateDashboard() {
 }
 
 
-/* INITIAL LOAD */
+// ================================
+// DASHBOARD AUTO LOAD
+// ================================
 
-updateDashboard();
+if (
+    document.getElementById(
+        "complaintsTable"
+    )
+) {
+
+    updateDashboard();
+}
