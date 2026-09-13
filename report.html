@@ -1,204 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>CivicFix - Report Problem</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Problem - CivicFix</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
-
 <header>
-
-    <div class="logo">
-        🏙️ CivicFix
-    </div>
-
     <nav>
+        <div class="logo">🏙️ CivicFix</div>
 
-        <a href="index.html">
-            🏠 Home
-        </a>
-
-        <a href="report.html">
-            📢 Report Problem
-        </a>
-
-        <a href="track.html">
-            🔎 Track Complaint
-        </a>
-
-        <a href="dashboard.html">
-            📊 Dashboard
-        </a>
-
+        <div class="nav-links">
+            <a href="index.html">🏠 Home</a>
+            <a href="report.html">📢 Report Problem</a>
+            <a href="track.html">🔎 Track Complaint</a>
+            <a href="dashboard.html">📊 Dashboard</a>
+        </div>
     </nav>
-
 </header>
 
+<section class="hero">
+    <div class="hero-content">
+        <h1>Report a Civic Problem</h1>
+        <p>Help us identify and resolve problems in your area.</p>
+    </div>
+</section>
+
+<section class="form-section">
+
+    <div class="form-container">
+
+        <h2>Submit Complaint</h2>
+
+        <form id="complaintForm">
+
+            <label for="category">Problem Category</label>
+
+            <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Road Damage">Road Damage</option>
+                <option value="Drainage Leakage">Drainage Leakage</option>
+                <option value="Garbage Dump">Garbage Dump</option>
+                <option value="Waterlogging">Waterlogging</option>
+                <option value="Street Light Problem">Street Light Problem</option>
+                <option value="Public Toilet - No Water">Public Toilet - No Water</option>
+                <option value="Public Toilet - No Electricity">Public Toilet - No Electricity</option>
+                <option value="Public Toilet - Blockage">Public Toilet - Blockage</option>
+                <option value="Unclean Public Toilet">Unclean Public Toilet</option>
+                <option value="Open Manhole">Open Manhole</option>
+                <option value="Dead Animal Removal">Dead Animal Removal</option>
+            </select>
 
 
-<section class="section">
+            <label for="department">Assigned Department</label>
 
-    <h2>
-        📢 Report a Civic Problem
-    </h2>
-
-
-    <div class="form-box">
-
-
-        <label>
-            Problem Category
-        </label>
+            <input
+                type="text"
+                id="department"
+                name="department"
+                readonly
+                placeholder="Department will appear automatically"
+            >
 
 
-        <select id="category">
+            <label for="location">Location</label>
 
-            <option value="">
-                Select Problem
-            </option>
+            <div class="location-row">
 
-            <option>Road Damage</option>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Enter location"
+                    required
+                >
 
-            <option>Drainage Leakage</option>
+                <button
+                    type="button"
+                    id="getLocation"
+                >
+                    📍 Get Location
+                </button>
 
-            <option>Garbage Dump</option>
-
-            <option>Waterlogging</option>
-
-            <option>Street Light Problem</option>
-
-            <option>Public Toilet - No Water</option>
-
-            <option>Public Toilet - No Electricity</option>
-
-            <option>Public Toilet - Blockage</option>
-
-            <option>Unclean Public Toilet</option>
-
-            <option>Open Manhole</option>
-
-            <option>Dead Animal Removal</option>
-
-        </select>
+            </div>
 
 
+            <label for="description">Problem Description</label>
 
-        <label>
-            Upload Problem Photo
-        </label>
-
-
-        <input
-            type="file"
-            id="photo"
-            accept="image/*"
-        >
+            <textarea
+                id="description"
+                name="description"
+                rows="5"
+                placeholder="Describe the problem..."
+                required
+            ></textarea>
 
 
+            <label for="photo">Problem Photo</label>
 
-        <label>
-            Location
-        </label>
-
-
-        <input
-            type="text"
-            id="location"
-            placeholder="Enter problem location"
-        >
+            <input
+                type="file"
+                id="photo"
+                name="photo"
+                accept="image/*"
+            >
 
 
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                🚀 Submit Complaint
+            </button>
 
-        <button
-            class="location-btn"
-            onclick="getLocation()"
-        >
-
-            📍 Use My Location
-
-        </button>
-
-
-
-        <label>
-            Description
-        </label>
-
-
-        <textarea
-            id="description"
-            placeholder="Describe the problem..."
-        ></textarea>
-
-
-
-        <button
-            class="submit-btn"
-            onclick="submitComplaint()"
-        >
-
-            Submit Complaint
-
-        </button>
-
+        </form>
 
     </div>
 
 </section>
 
 
-
-<div
-    id="successBox"
-    class="success-box"
->
-
-    <h2>
-        ✅ Complaint Submitted Successfully
-    </h2>
-
-    <p>
-        Your Complaint ID is:
-    </p>
-
-    <h1 id="complaintId"></h1>
-
-    <p>
-        Please save this ID to track your complaint.
-    </p>
-
-</div>
-
-
-
 <footer>
-
-    <h3>
-        🏙️ CivicFix
-    </h3>
-
-    <p>
-        Smart Civic Complaint & Action Tracking System
-    </p>
-
+    <p>© 2026 CivicFix - Smart Civic Complaint & Action Tracking System</p>
 </footer>
-
 
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
