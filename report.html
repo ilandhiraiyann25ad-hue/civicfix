@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CivicFix - Report Problem</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🏙️ CivicFix
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+        <a href="report.html">
+            📢 Report Problem
+        </a>
+
+        <a href="track.html">
+            🔎 Track Complaint
+        </a>
+
+        <a href="dashboard.html">
+            📊 Dashboard
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<section class="section">
+
+    <h2>
+        📢 Report a Civic Problem
+    </h2>
+
+
+    <div class="form-box">
+
+
+        <label>
+            Problem Category
+        </label>
+
+
+        <select id="category">
+
+            <option value="">
+                Select Problem
+            </option>
+
+            <option>Road Damage</option>
+
+            <option>Drainage Leakage</option>
+
+            <option>Garbage Dump</option>
+
+            <option>Waterlogging</option>
+
+            <option>Street Light Problem</option>
+
+            <option>Public Toilet - No Water</option>
+
+            <option>Public Toilet - No Electricity</option>
+
+            <option>Public Toilet - Blockage</option>
+
+            <option>Unclean Public Toilet</option>
+
+            <option>Open Manhole</option>
+
+            <option>Dead Animal Removal</option>
+
+        </select>
+
+
+
+        <label>
+            Upload Problem Photo
+        </label>
+
+
+        <input
+            type="file"
+            id="photo"
+            accept="image/*"
+        >
+
+
+
+        <label>
+            Location
+        </label>
+
+
+        <input
+            type="text"
+            id="location"
+            placeholder="Enter problem location"
+        >
+
+
+
+        <button
+            class="location-btn"
+            onclick="getLocation()"
+        >
+
+            📍 Use My Location
+
+        </button>
+
+
+
+        <label>
+            Description
+        </label>
+
+
+        <textarea
+            id="description"
+            placeholder="Describe the problem..."
+        ></textarea>
+
+
+
+        <button
+            class="submit-btn"
+            onclick="submitComplaint()"
+        >
+
+            Submit Complaint
+
+        </button>
+
+
+    </div>
+
+</section>
+
+
+
+<div
+    id="successBox"
+    class="success-box"
+>
+
+    <h2>
+        ✅ Complaint Submitted Successfully
+    </h2>
+
+    <p>
+        Your Complaint ID is:
+    </p>
+
+    <h1 id="complaintId"></h1>
+
+    <p>
+        Please save this ID to track your complaint.
+    </p>
+
+</div>
+
+
+
+<footer>
+
+    <h3>
+        🏙️ CivicFix
+    </h3>
+
+    <p>
+        Smart Civic Complaint & Action Tracking System
+    </p>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
