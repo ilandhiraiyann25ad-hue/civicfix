@@ -3,7 +3,7 @@ let complaints = [];
 
 /* BACKEND URL */
 
-const API_URL = "http://127.0.0.1:8001";
+const API_URL = "https://civicfix-backend-ef93.onrender.com";
 
 
 /* DEPARTMENT MAPPING */
@@ -76,7 +76,7 @@ function getLocation() {
 
 async function submitComplaint() {
 
-    console.log("Connecting to backend...");
+    console.log("Connecting to online backend...");
 
 
     let category =
@@ -209,7 +209,7 @@ async function submitComplaint() {
         console.error(error);
 
         alert(
-            "Backend connection failed. Please make sure FastAPI server is running."
+            "Backend connection failed. Please try again."
         );
     }
 }
@@ -309,7 +309,10 @@ async function trackComplaint() {
 
             ? `
                 <div>
-                    <strong>After Work Proof:</strong>
+
+                    <strong>
+                        After Work Proof:
+                    </strong>
 
                     <br><br>
 
@@ -329,12 +332,16 @@ async function trackComplaint() {
                     <small>
                         ${complaint.after_photo}
                     </small>
+
                 </div>
               `
 
             : `
                 <p>
-                    <strong>After Work Proof:</strong>
+                    <strong>
+                        After Work Proof:
+                    </strong>
+
                     Not Uploaded
                 </p>
               `;
@@ -413,7 +420,10 @@ async function trackComplaint() {
 
 /* UPDATE COMPLAINT STATUS */
 
-async function updateStatus(complaintId, newStatus) {
+async function updateStatus(
+    complaintId,
+    newStatus
+) {
 
     console.log(
         "Updating complaint:",
@@ -478,7 +488,7 @@ async function updateStatus(complaintId, newStatus) {
         console.error(error);
 
         alert(
-            "Unable to update complaint status. Please make sure backend is running."
+            "Unable to update complaint status."
         );
     }
 }
@@ -486,7 +496,10 @@ async function updateStatus(complaintId, newStatus) {
 
 /* ASSIGN WORKER */
 
-async function assignWorker(complaintId, worker) {
+async function assignWorker(
+    complaintId,
+    worker
+) {
 
     console.log(
         "Assigning worker:",
@@ -559,7 +572,7 @@ async function assignWorker(complaintId, worker) {
         console.error(error);
 
         alert(
-            "Unable to assign worker. Please make sure backend is running."
+            "Unable to assign worker."
         );
     }
 }
@@ -567,7 +580,10 @@ async function assignWorker(complaintId, worker) {
 
 /* AFTER WORK PHOTO */
 
-async function uploadAfterPhoto(complaintId, file) {
+async function uploadAfterPhoto(
+    complaintId,
+    file
+) {
 
     console.log(
         "Uploading after-work photo for complaint:",
@@ -758,6 +774,11 @@ async function updateDashboard() {
             );
 
 
+        if (!table) {
+            return;
+        }
+
+
         table.innerHTML = "";
 
 
@@ -919,6 +940,7 @@ async function updateDashboard() {
 
 
                 table.appendChild(row);
+
             }
         );
 
@@ -931,7 +953,7 @@ async function updateDashboard() {
         );
 
         console.log(
-            "Backend server may not be running."
+            "Online backend server may not be available."
         );
     }
 }
