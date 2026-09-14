@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>CivicFix - Authority Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+
+<style>
+
+    body {
+        background:
+            linear-gradient(
+                135deg,
+                #eef2ff,
+                #fdf4ff,
+                #ecfeff
+            );
+
+        overflow-x: hidden;
+    }
+
+
+    /* ================================
+       DASHBOARD
+    ================================= */
+
+    .dashboard-section {
+
+        min-height: 850px;
+
+        padding:
+            55px 5% 90px;
+
+        position: relative;
+
+        overflow: hidden;
+
+        background:
+
+            radial-gradient(
+                circle at 5% 10%,
+                rgba(34,211,238,0.22),
+                transparent 23%
+            ),
+
+            radial-gradient(
+                circle at 95% 15%,
+                rgba(236,72,153,0.20),
+                transparent 25%
+            ),
+
+            radial-gradient(
+                circle at 50% 100%,
+                rgba(124,58,237,0.18),
+                transparent 30%
+            );
+    }
+
+
+    .dashboard-section::before {
+
+        content: "";
+
+        position: absolute;
+
+        width: 500px;
+        height: 500px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid
+            rgba(124,58,237,0.12);
+
+        top: -220px;
+        right: -180px;
+
+        animation:
+            dashboardRing
+            12s linear infinite;
+    }
+
+
+    .dashboard-section::after {
+
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+        height: 350px;
+
+        border-radius: 50%;
+
+        border:
+            1px solid
+            rgba(6,182,212,0.13);
+
+        bottom: -180px;
+        left: -140px;
+
+        animation:
+            dashboardRing
+            9s linear infinite reverse;
+    }
+
+
+    @keyframes dashboardRing {
+
+        0% {
+            transform:
+                rotate(0deg)
+                scale(1);
+        }
+
+        50% {
+            transform:
+                rotate(180deg)
+                scale(1.18);
+        }
+
+        100% {
+            transform:
+                rotate(360deg)
+                scale(1);
+        }
+    }
+
+
+    /* ================================
+       HEADING
+    ================================= */
+
+    .dashboard-heading {
+
+        position: relative;
+
+        z-index: 5;
+
+        text-align: center;
+
+        margin-bottom: 42px;
+
+        animation:
+            dashboardHeading
+            1s
+            ease;
+    }
+
+
+    @keyframes dashboardHeading {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(-45px)
+                scale(0.92);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+    }
+
+
+    .dashboard-icon {
+
+        width: 76px;
+        height: 76px;
+
+        margin:
+            0 auto 15px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 23px;
+
+        font-size: 37px;
+
+        color: white;
+
+        background:
+            linear-gradient(
+                135deg,
+                #06b6d4,
+                #7c3aed,
+                #ec4899
+            );
+
+        box-shadow:
+            0 15px 40px
+            rgba(124,58,237,0.28);
+
+        animation:
+            dashboardIcon
+            3s ease-in-out infinite;
+    }
+
+
+    @keyframes dashboardIcon {
+
+        0%,100% {
+            transform:
+                translateY(0)
+                rotate(0deg);
+        }
+
+        50% {
+            transform:
+                translateY(-9px)
+                rotate(5deg);
+        }
+    }
+
+
+    .dashboard-heading h2 {
+
+        font-size: 38px;
+
+        margin-bottom: 10px;
+
+        background:
+            linear-gradient(
+                90deg,
+                #312e81,
+                #7c3aed,
+                #be185d
+            );
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        background-clip: text;
+    }
+
+
+    .dashboard-heading p {
+
+        color: #64748b;
+
+        font-size: 16px;
+    }
+
+
+    /* ================================
+       LIVE
+    ================================= */
+
+    .live-status {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        margin-top: 14px;
+
+        padding:
+            8px 15px;
+
+        border-radius: 50px;
+
+        background:
+            rgba(255,255,255,0.75);
+
+        border:
+            1px solid #dbeafe;
+
+        color: #047857;
+
+        font-size: 13px;
+
+        font-weight: 800;
+
+        box-shadow:
+            0 8px 20px
+            rgba(16,185,129,0.08);
+    }
+
+
+    .live-dot {
+
+        width: 9px;
+        height: 9px;
+
+        border-radius: 50%;
+
+        background: #10b981;
+
+        animation:
+            livePulse
+            1.5s
+            infinite;
+    }
+
+
+    @keyframes livePulse {
+
+        0%,100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.4);
+
+            box-shadow:
+                0 0 15px
+                rgba(16,185,129,0.7);
+        }
+    }
+
+
+    /* ================================
+       STAT CARDS
+    ================================= */
+
+    .dashboard-stats {
+
+        position: relative;
+
+        z-index: 5;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4,1fr);
+
+        gap: 22px;
+
+        max-width: 1250px;
+
+        margin:
+            0 auto 45px;
+    }
+
+
+    .dashboard-stat {
+
+        position: relative;
+
+        overflow: hidden;
+
+        min-height: 175px;
+
+        padding: 25px;
+
+        border-radius: 22px;
+
+        background:
+            rgba(255,255,255,0.88);
+
+        backdrop-filter:
+            blur(18px);
+
+        box-shadow:
+            0 18px 45px
+            rgba(76,29,149,0.10);
+
+        transition:
+            0.4s ease;
+
+        animation:
+            statEnter
+            0.8s
+            ease backwards;
+    }
+
+
+    .dashboard-stat:nth-child(1) {
+        animation-delay: .1s;
+    }
+
+    .dashboard-stat:nth-child(2) {
+        animation-delay: .2s;
+    }
+
+    .dashboard-stat:nth-child(3) {
+        animation-delay: .3s;
+    }
+
+    .dashboard-stat:nth-child(4) {
+        animation-delay: .4s;
+    }
+
+
+    @keyframes statEnter {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(45px)
+                scale(.88);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+    }
+
+
+    .dashboard-stat:hover {
+
+        transform:
+            translateY(-12px)
+            scale(1.025);
+
+        box-shadow:
+            0 28px 60px
+            rgba(76,29,149,0.18);
+    }
+
+
+    .stat-top {
+
+        display: flex;
+
+        justify-content:
+            space-between;
+
+        align-items: center;
+
+        margin-bottom: 15px;
+    }
+
+
+    .stat-icon {
+
+        width: 48px;
+        height: 48px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 14px;
+
+        font-size: 24px;
+
+        background:
+            #f5f3ff;
+
+        transition:
+            .4s ease;
+    }
+
+
+    .dashboard-stat:hover
+    .stat-icon {
+
+        transform:
+            rotate(-8deg)
+            scale(1.15);
+    }
+
+
+    .stat-label {
+
+        font-size: 13px;
+
+        color: #64748b;
+
+        font-weight: 700;
+    }
+
+
+    .dashboard-stat h3 {
+
+        font-size: 42px;
+
+        line-height: 1;
+
+        margin-top: 8px;
+
+        color: #312e81;
+    }
+
+
+    .dashboard-stat:nth-child(2) h3 {
+        color: #d97706;
+    }
+
+    .dashboard-stat:nth-child(3) h3 {
+        color: #7c3aed;
+    }
+
+    .dashboard-stat:nth-child(4) h3 {
+        color: #059669;
+    }
+
+
+    /* ================================
+       PANEL
+    ================================= */
+
+    .complaints-panel {
+
+        position: relative;
+
+        z-index: 5;
+
+        max-width: 1250px;
+
+        margin: auto;
+
+        padding: 28px;
+
+        border-radius: 24px;
+
+        background:
+            rgba(255,255,255,0.90);
+
+        backdrop-filter:
+            blur(18px);
+
+        box-shadow:
+            0 25px 65px
+            rgba(76,29,149,0.12);
+
+        animation:
+            panelEnter
+            1s
+            ease;
+    }
+
+
+    @keyframes panelEnter {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateY(45px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+    }
+
+
+    .panel-header {
+
+        display: flex;
+
+        justify-content:
+            space-between;
+
+        align-items: center;
+
+        margin-bottom: 22px;
+    }
+
+
+    .panel-header h3 {
+
+        color: #312e81;
+
+        font-size: 21px;
+    }
+
+
+    .panel-header span {
+
+        padding:
+            7px 13px;
+
+        border-radius: 50px;
+
+        color: #6d28d9;
+
+        background:
+            #f5f3ff;
+
+        font-size: 12px;
+
+        font-weight: 800;
+    }
+
+
+    /* ================================
+       TABLE
+    ================================= */
+
+    .dashboard-table {
+
+        overflow-x: auto;
+
+        border-radius: 15px;
+    }
+
+
+    .dashboard-table table {
+
+        width: 100%;
+
+        min-width: 950px;
+
+        border-collapse:
+            separate;
+
+        border-spacing: 0;
+
+        background: white;
+    }
+
+
+    .dashboard-table th {
+
+        padding:
+            16px 14px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #312e81,
+                #5b21b6,
+                #831843
+            );
+
+        color: white;
+
+        font-size: 13px;
+
+        text-align: left;
+
+        white-space: nowrap;
+    }
+
+
+    .dashboard-table th:first-child {
+
+        border-top-left-radius: 12px;
+    }
+
+
+    .dashboard-table th:last-child {
+
+        border-top-right-radius: 12px;
+    }
+
+
+    .dashboard-table td {
+
+        padding:
+            15px 14px;
+
+        border-bottom:
+            1px solid #eef2f7;
+
+        color: #475569;
+
+        font-size: 13px;
+
+        background: white;
+
+        transition:
+            .3s ease;
+    }
+
+
+    .dashboard-table tbody tr {
+
+        animation:
+            rowAppear
+            .6s
+            ease backwards;
+
+        transition:
+            .3s ease;
+    }
+
+
+    .dashboard-table tbody tr:hover {
+
+        transform:
+            scale(1.008);
+    }
+
+
+    .dashboard-table tbody tr:hover td {
+
+        background:
+            #faf5ff;
+    }
+
+
+    @keyframes rowAppear {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translateX(-20px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translateX(0);
+        }
+    }
+
+
+    /* ================================
+       CAMERA BUTTON
+    ================================= */
+
+    .camera-upload-btn {
+
+        border: none;
+
+        cursor: pointer;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 7px;
+
+        padding:
+            10px 14px;
+
+        border-radius: 12px;
+
+        color: white;
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        background:
+            linear-gradient(
+                135deg,
+                #06b6d4,
+                #7c3aed,
+                #ec4899
+            );
+
+        box-shadow:
+            0 8px 20px
+            rgba(124,58,237,0.22);
+
+        transition:
+            .3s ease;
+
+        white-space: nowrap;
+    }
+
+
+    .camera-upload-btn:hover {
+
+        transform:
+            translateY(-3px)
+            scale(1.04);
+
+        box-shadow:
+            0 13px 28px
+            rgba(124,58,237,0.30);
+    }
+
+
+    .camera-upload-btn:active {
+
+        transform:
+            scale(.95);
+    }
+
+
+    .camera-input {
+
+        display: none;
+    }
+
+
+    .photo-upload-status {
+
+        display: block;
+
+        margin-top: 7px;
+
+        font-size: 11px;
+
+        font-weight: 700;
+    }
+
+
+    .photo-success {
+
+        color: #059669;
+
+        animation:
+            photoSuccess
+            .5s
+            ease;
+    }
+
+
+    .photo-error {
+
+        color: #dc2626;
+    }
+
+
+    @keyframes photoSuccess {
+
+        0% {
+            opacity: 0;
+
+            transform:
+                scale(.7);
+        }
+
+        100% {
+            opacity: 1;
+
+            transform:
+                scale(1);
+        }
+    }
+
+
+    .after-photo-preview {
+
+        width: 55px;
+
+        height: 55px;
+
+        object-fit: cover;
+
+        border-radius: 10px;
+
+        margin-top: 8px;
+
+        border:
+            2px solid
+            #ddd6fe;
+
+        box-shadow:
+            0 5px 15px
+            rgba(0,0,0,.12);
+
+        animation:
+            photoAppear
+            .5s
+            ease;
+    }
+
+
+    @keyframes photoAppear {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                scale(.5)
+                rotate(-8deg);
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                scale(1)
+                rotate(0);
+        }
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================= */
+
+    @media (max-width: 1000px) {
+
+        .dashboard-stats {
+
+            grid-template-columns:
+                repeat(2,1fr);
+        }
+    }
+
+
+    @media (max-width: 650px) {
+
+        .dashboard-section {
+
+            padding:
+                45px 4% 70px;
+        }
+
+
+        .dashboard-heading h2 {
+
+            font-size: 29px;
+        }
+
+
+        .dashboard-icon {
+
+            width: 65px;
+            height: 65px;
+
+            font-size: 30px;
+        }
+
+
+        .dashboard-stats {
+
+            grid-template-columns:
+                1fr;
+
+            gap: 15px;
+        }
+
+
+        .dashboard-stat {
+
+            min-height: 150px;
+        }
+
+
+        .complaints-panel {
+
+            padding: 18px;
+
+            border-radius: 18px;
+        }
+
+
+        .panel-header {
+
+            align-items:
+                flex-start;
+
+            gap: 10px;
+        }
+
+
+        .camera-upload-btn {
+
+            padding:
+                11px 13px;
+
+            font-size: 11px;
+        }
+    }
+
+
+    /* ================================
+       FOOTER
+    ================================= */
+
+    footer {
+
+        background:
+            linear-gradient(
+                135deg,
+                #0f172a,
+                #312e81,
+                #581c87,
+                #831843
+            );
+
+        background-size:
+            250% 250%;
+
+        animation:
+            footerMove
+            8s
+            ease infinite;
+    }
+
+
+    @keyframes footerMove {
+
+        0% {
+            background-position:
+                0% 50%;
+        }
+
+        50% {
+            background-position:
+                100% 50%;
+        }
+
+        100% {
+            background-position:
+                0% 50%;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    🏙️ CivicFix
+</div>
+
+
+<nav>
+
+    <a href="index.html">
+        🏠 Home
+    </a>
+
+    <a href="report.html">
+        📢 Report Problem
+    </a>
+
+    <a href="track.html">
+        🔎 Track Complaint
+    </a>
+
+    <a href="dashboard.html">
+        📊 Dashboard
+    </a>
+
+</nav>
+```
+
+</header>
+
+<section class="dashboard-section">
+
+```
+<div class="dashboard-heading">
+
+    <div class="dashboard-icon">
+        👨‍💼
+    </div>
+
+
+    <h2>
+        Authority Dashboard
+    </h2>
+
+
+    <p>
+        Monitor civic complaints,
+        department actions and resolution progress.
+    </p>
+
+
+    <div class="live-status">
+
+        <span class="live-dot"></span>
+
+        System Live
+
+    </div>
+
+</div>
+
+
+
+<div class="dashboard-stats">
+
+
+    <div class="dashboard-stat">
+
+        <div class="stat-top">
+
+            <span class="stat-label">
+                TOTAL COMPLAINTS
+            </span>
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+        </div>
+
+
+        <h3 id="total">
+            0
+        </h3>
+
+    </div>
+
+
+
+    <div class="dashboard-stat">
+
+        <div class="stat-top">
+
+            <span class="stat-label">
+                PENDING
+            </span>
+
+            <div class="stat-icon">
+                ⏳
+            </div>
+
+        </div>
+
+
+        <h3 id="pending">
+            0
+        </h3>
+
+    </div>
+
+
+
+    <div class="dashboard-stat">
+
+        <div class="stat-top">
+
+            <span class="stat-label">
+                IN PROGRESS
+            </span>
+
+            <div class="stat-icon">
+                🔄
+            </div>
+
+        </div>
+
+
+        <h3 id="progress">
+            0
+        </h3>
+
+    </div>
+
+
+
+    <div class="dashboard-stat">
+
+        <div class="stat-top">
+
+            <span class="stat-label">
+                COMPLETED
+            </span>
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+        </div>
+
+
+        <h3 id="completed">
+            0
+        </h3>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="complaints-panel">
+
+
+    <div class="panel-header">
+
+        <h3>
+            📊 Complaint Activity
+        </h3>
+
+
+        <span>
+            LIVE DATA
+        </span>
+
+    </div>
+
+
+
+    <div class="dashboard-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Problem</th>
+
+                    <th>Location</th>
+
+                    <th>Department</th>
+
+                    <th>Status</th>
+
+                    <th>Update Status</th>
+
+                    <th>Worker</th>
+
+                    <th>After Work Photo</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="complaintTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<footer>
+
+```
+<h3>
+    🏙️ CivicFix
+</h3>
+
+
+<p>
+    Smart Civic Complaint & Action Tracking System
+</p>
+```
+
+</footer>
+
+<script src="script.js"></script>
+
+<!-- =========================================
+     MOBILE CAMERA PHOTO UPLOAD
+========================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const table =
+            document.getElementById(
+                "complaintTable"
+            );
+
+
+        if (!table) {
+            return;
+        }
+
+
+        function addCameraButtons() {
+
+            const rows =
+                table.querySelectorAll("tr");
+
+
+            rows.forEach(
+                function(row) {
+
+                    if (
+                        row.dataset.cameraAdded === "true"
+                    ) {
+                        return;
+                    }
+
+
+                    const cells =
+                        row.querySelectorAll("td");
+
+
+                    if (cells.length < 5) {
+                        return;
+                    }
+
+
+                    row.dataset.cameraAdded =
+                        "true";
+
+
+                    /*
+                     * Last cell = After Work Photo
+                     */
+
+                    let photoCell =
+                        cells[cells.length - 1];
+
+
+                    /*
+                     * Existing empty cells may not
+                     * exist because script.js currently
+                     * creates only 5 columns.
+                     *
+                     * Add missing cells.
+                     */
+
+                    while (
+                        row.children.length < 8
+                    ) {
+
+                        row.appendChild(
+                            document.createElement("td")
+                        );
+
+                    }
+
+
+                    photoCell =
+                        row.children[7];
+
+
+                    /*
+                     * Complaint ID
+                     */
+
+                    const complaintId =
+                        row.children[0]
+                            .innerText
+                            .trim();
+
+
+                    if (
+                        !complaintId.startsWith("CIV-")
+                    ) {
+                        return;
+                    }
+
+
+                    const numericId =
+                        complaintId
+                            .replace("CIV-", "");
+
+
+                    /*
+                     * Camera input
+                     */
+
+                    const input =
+                        document.createElement("input");
+
+
+                    input.type = "file";
+
+                    input.accept =
+                        "image/*";
+
+                    input.capture =
+                        "environment";
+
+                    input.className =
+                        "camera-input";
+
+
+                    input.id =
+                        "camera_" +
+                        numericId;
+
+
+                    /*
+                     * Camera button
+                     */
+
+                    const button =
+                        document.createElement("button");
+
+
+                    button.type =
+                        "button";
+
+
+                    button.className =
+                        "camera-upload-btn";
+
+
+                    button.innerHTML =
+                        "📷 Take / Upload Photo";
+
+
+                    button.onclick =
+                        function() {
+
+                            input.click();
+
+                        };
+
+
+                    /*
+                     * Status
+                     */
+
+                    const status =
+                        document.createElement("span");
+
+
+                    status.className =
+                        "photo-upload-status";
+
+
+                    status.innerText =
+                        "Worker photo required";
+
+
+                    /*
+                     * Add elements
+                     */
+
+                    photoCell.appendChild(button);
+
+                    photoCell.appendChild(input);
+
+                    photoCell.appendChild(status);
+
+
+                    /*
+                     * Photo selected
+                     */
+
+                    input.addEventListener(
+                        "change",
+                        async function() {
+
+                            const file =
+                                input.files[0];
+
+
+                            if (!file) {
+                                return;
+                            }
+
+
+                            /*
+                             * Show uploading
+                             */
+
+                            status.className =
+                                "photo-upload-status";
+
+
+                            status.innerText =
+                                "⏳ Uploading photo...";
+
+
+                            button.disabled =
+                                true;
+
+
+                            const formData =
+                                new FormData();
+
+
+                            formData.append(
+                                "photo",
+                                file
+                            );
+
+
+                            try {
+
+                                const response =
+                                    await fetch(
+                                        "https://civicfix-backend-ef93.onrender.com/complaints/" +
+                                        numericId +
+                                        "/after-photo",
+                                        {
+                                            method:
+                                                "PUT",
+
+                                            body:
+                                                formData
+                                        }
+                                    );
+
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        "Photo upload failed"
+                                    );
+
+                                }
+
+
+                                const data =
+                                    await response.json();
+
+
+                                status.className =
+                                    "photo-upload-status photo-success";
+
+
+                                status.innerText =
+                                    "✅ Photo uploaded";
+
+
+                                button.innerHTML =
+                                    "📷 Upload Again";
+
+
+                                /*
+                                 * Preview
+                                 */
+
+                                const oldPreview =
+                                    photoCell.querySelector(
+                                        ".after-photo-preview"
+                                    );
+
+
+                                if (oldPreview) {
+
+                                    oldPreview.remove();
+
+                                }
+
+
+                                const preview =
+                                    document.createElement(
+                                        "img"
+                                    );
+
+
+                                preview.className =
+                                    "after-photo-preview";
+
+
+                                preview.src =
+                                    "https://civicfix-backend-ef93.onrender.com" +
+                                    data.photo_url;
+
+
+                                preview.alt =
+                                    "After work photo";
+
+
+                                photoCell.appendChild(
+                                    preview
+                                );
+
+
+                            }
+                            catch(error) {
+
+                                console.error(
+                                    error
+                                );
+
+
+                                status.className =
+                                    "photo-upload-status photo-error";
+
+
+                                status.innerText =
+                                    "❌ Upload failed. Try again.";
+
+                            }
+                            finally {
+
+                                button.disabled =
+                                    false;
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Initial check
+         */
+
+        addCameraButtons();
+
+
+        /*
+         * Watch script.js for newly loaded
+         * complaint rows.
+         */
+
+        const observer =
+            new MutationObserver(
+                function() {
+
+                    addCameraButtons();
+
+                }
+            );
+
+
+        observer.observe(
+            table,
+            {
+                childList: true,
+                subtree: true
+            }
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
