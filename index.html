@@ -1,756 +1,1142 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
 
-```
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>CivicFix - Smart Civic Platform</title>
+    <title>CivicFix - Smart Civic Platform</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-<style>
+    <style>
 
-    /* ==============================
-       UNIQUE HOME PAGE
-    ============================== */
-
-    .hero {
-        min-height: 620px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        padding: 80px 8%;
-
-        background:
-            radial-gradient(
-                circle at 10% 20%,
-                rgba(34,211,238,0.55),
-                transparent 25%
-            ),
-            radial-gradient(
-                circle at 90% 15%,
-                rgba(244,114,182,0.55),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 80% 90%,
-                rgba(167,139,250,0.45),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #0f172a,
-                #312e81,
-                #581c87,
-                #831843
-            );
-
-        background-size: 200% 200%;
-        animation: heroGradient 10s ease infinite;
-    }
-
-    @keyframes heroGradient {
-
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-
-    /* Floating circles */
-
-    .hero::before {
-        content: "";
-        position: absolute;
-
-        width: 420px;
-        height: 420px;
-
-        border-radius: 50%;
-
-        border: 1px solid rgba(255,255,255,0.18);
-
-        right: -120px;
-        top: -120px;
-
-        animation: circleRotate 12s linear infinite;
-    }
-
-    .hero::after {
-        content: "";
-        position: absolute;
-
-        width: 250px;
-        height: 250px;
-
-        border-radius: 50%;
-
-        border: 1px solid rgba(255,255,255,0.16);
-
-        left: -80px;
-        bottom: -80px;
-
-        animation: circleRotate 9s linear infinite reverse;
-    }
-
-    @keyframes circleRotate {
-
-        from {
-            transform: rotate(0deg) scale(1);
-        }
-
-        50% {
-            transform: rotate(180deg) scale(1.12);
-        }
-
-        to {
-            transform: rotate(360deg) scale(1);
-        }
-    }
-
-
-    /* Hero content */
-
-    .hero-text {
-        position: relative;
-        z-index: 5;
-
-        max-width: 760px;
-
-        animation:
-            heroContent 1.2s
-            cubic-bezier(.17,.67,.35,1.2);
-    }
-
-    @keyframes heroContent {
-
-        from {
-            opacity: 0;
-            transform:
-                translateY(70px)
-                scale(0.92);
-        }
-
-        to {
-            opacity: 1;
-            transform:
-                translateY(0)
-                scale(1);
-        }
-    }
-
-
-    /* Small badge */
-
-    .hero-text::before {
-        content:
-            "✨ SMART CIVIC TECHNOLOGY";
-
-        display: inline-block;
-
-        padding: 9px 18px;
-
-        margin-bottom: 22px;
-
-        border-radius: 50px;
-
-        color: white;
-
-        font-size: 13px;
-        font-weight: 700;
-
-        letter-spacing: 1px;
-
-        background:
-            rgba(255,255,255,0.12);
-
-        border:
-            1px solid
-            rgba(255,255,255,0.25);
-
-        backdrop-filter: blur(12px);
-
-        animation:
-            badgeFloat 3s ease-in-out infinite;
-    }
-
-    @keyframes badgeFloat {
-
-        0%,100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-7px);
-        }
-    }
-
-
-    /* Main heading */
-
-    .hero h1 {
-
-        font-size: 55px;
-
-        line-height: 1.1;
-
-        color: white;
-
-        margin-bottom: 24px;
-
-        letter-spacing: -2px;
-
-        max-width: 780px;
-
-        animation:
-            titleGlow
-            3s ease-in-out infinite alternate;
-    }
-
-    @keyframes titleGlow {
-
-        from {
-            text-shadow:
-                0 0 0 rgba(103,232,249,0);
-        }
-
-        to {
-            text-shadow:
-                0 0 30px
-                rgba(103,232,249,0.28);
-        }
-    }
-
-
-    /* Gradient words */
-
-    .hero h1 span {
-        background:
-            linear-gradient(
-                90deg,
-                #67e8f9,
-                #c084fc,
-                #f9a8d4
-            );
-
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        background-clip: text;
-    }
-
-
-    .hero p {
-
-        font-size: 20px;
-
-        line-height: 1.7;
-
-        color: #e0e7ff;
-
-        max-width: 650px;
-
-        margin-bottom: 32px;
-
-        animation:
-            paragraphReveal
-            1.5s ease;
-    }
-
-    @keyframes paragraphReveal {
-
-        from {
-            opacity: 0;
-            transform: translateY(25px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-
-    /* Main button */
-
-    .hero .btn {
-
-        padding: 16px 28px;
-
-        border-radius: 12px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #06b6d4,
-                #7c3aed,
-                #ec4899
-            );
-
-        background-size: 200% 200%;
-
-        box-shadow:
-            0 12px 35px
-            rgba(124,58,237,0.4);
-
-        animation:
-            buttonGradient
-            4s ease infinite;
-
-        transition: 0.35s;
-    }
-
-    @keyframes buttonGradient {
-
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-    .hero .btn:hover {
-
-        transform:
-            translateY(-7px)
-            scale(1.05);
-
-        box-shadow:
-            0 20px 50px
-            rgba(236,72,153,0.45);
-    }
-
-
-    /* ==============================
-       FLOATING CITY VISUAL
-    ============================== */
-
-    .hero-visual {
-
-        position: absolute;
-
-        right: 7%;
-
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        width: 350px;
-        height: 350px;
-
-        z-index: 4;
-    }
-
-
-    .city-orb {
-
-        width: 100%;
-        height: 100%;
-
-        border-radius: 50%;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        background:
-            rgba(255,255,255,0.08);
-
-        border:
-            1px solid
-            rgba(255,255,255,0.20);
-
-        backdrop-filter: blur(15px);
-
-        box-shadow:
-            0 0 80px
-            rgba(34,211,238,0.20),
-
-            inset 0 0 60px
-            rgba(255,255,255,0.06);
-
-        animation:
-            orbFloat
-            5s ease-in-out infinite;
-    }
-
-    @keyframes orbFloat {
-
-        0%,100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-18px);
-        }
-    }
-
-
-    .city-icon {
-
-        font-size: 125px;
-
-        filter:
-            drop-shadow(
-                0 15px 25px
-                rgba(0,0,0,0.25)
-            );
-
-        animation:
-            cityPulse
-            3s ease-in-out infinite;
-    }
-
-    @keyframes cityPulse {
-
-        0%,100% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.08);
-        }
-    }
-
-
-    /* Floating problem cards */
-
-    .floating-problem {
-
-        position: absolute;
-
-        padding: 12px 17px;
-
-        border-radius: 13px;
-
-        color: white;
-
-        background:
-            rgba(15,23,42,0.72);
-
-        border:
-            1px solid
-            rgba(255,255,255,0.18);
-
-        backdrop-filter: blur(12px);
-
-        box-shadow:
-            0 15px 35px
-            rgba(0,0,0,0.25);
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        white-space: nowrap;
-    }
-
-    .problem-one {
-
-        top: 20px;
-        right: -35px;
-
-        animation:
-            problemFloat
-            4s ease-in-out infinite;
-    }
-
-    .problem-two {
-
-        bottom: 45px;
-        left: -50px;
-
-        animation:
-            problemFloat
-            4s ease-in-out infinite 1s;
-    }
-
-    .problem-three {
-
-        bottom: -15px;
-        right: 35px;
-
-        animation:
-            problemFloat
-            4s ease-in-out infinite 2s;
-    }
-
-    @keyframes problemFloat {
-
-        0%,100% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-11px);
-        }
-    }
-
-
-    /* ==============================
-       HOW IT WORKS
-    ============================== */
-
-    .section {
-
-        background:
-            linear-gradient(
-                180deg,
-                #f8fafc,
-                #eef2ff
-            );
-    }
-
-
-    .section h2 {
-
-        font-size: 34px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #312e81,
-                #7c3aed,
-                #be185d
-            );
-
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        background-clip: text;
-    }
-
-
-    /* Cards */
-
-    .stats {
-
-        max-width: 1150px;
-
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-
-    .stat-card {
-
-        position: relative;
-
-        overflow: hidden;
-
-        background:
-            rgba(255,255,255,0.95);
-
-        transition:
-            transform 0.4s ease,
-            box-shadow 0.4s ease;
-    }
-
-
-    .stat-card::before {
-
-        content: "";
-
-        position: absolute;
-
-        width: 120px;
-        height: 120px;
-
-        border-radius: 50%;
-
-        right: -55px;
-        top: -55px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #a78bfa,
-                #67e8f9
-            );
-
-        opacity: 0.22;
-
-        transition: 0.5s;
-    }
-
-
-    .stat-card:hover {
-
-        transform:
-            translateY(-12px)
-            scale(1.03);
-
-        box-shadow:
-            0 25px 55px
-            rgba(76,29,149,0.18);
-    }
-
-
-    .stat-card:hover::before {
-
-        transform: scale(1.7);
-
-        opacity: 0.35;
-    }
-
-
-    .stat-card h3 {
-
-        font-size: 40px;
-
-        transition:
-            transform 0.4s ease;
-    }
-
-
-    .stat-card:hover h3 {
-
-        transform:
-            scale(1.2)
-            rotate(-5deg);
-    }
-
-
-    .stat-card p {
-
-        font-size: 18px;
-
-        color: #312e81;
-    }
-
-
-    .stat-card small {
-
-        display: block;
-
-        margin-top: 8px;
-
-        color: #64748b;
-
-        line-height: 1.5;
-    }
-
-
-    /* ==============================
-       FOOTER
-    ============================== */
-
-    footer {
-
-        background:
-            linear-gradient(
-                135deg,
-                #0f172a,
-                #312e81,
-                #581c87,
-                #831843
-            );
-
-        background-size: 200% 200%;
-
-        animation:
-            footerGradient
-            8s ease infinite;
-    }
-
-    @keyframes footerGradient {
-
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-
-    /* ==============================
-       MOBILE
-    ============================== */
-
-    @media (max-width: 900px) {
-
-        .hero-visual {
-
-            right: -90px;
-
-            opacity: 0.25;
-        }
-
-        .hero h1 {
-
-            font-size: 46px;
-        }
-    }
-
-
-    @media (max-width: 600px) {
+        /* ==============================
+           CIVICFIX HOME - PREMIUM
+        ============================== */
 
         .hero {
+            min-height: 620px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 80px 8%;
 
-            min-height: 600px;
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(34,211,238,0.55),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(244,114,182,0.55),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 80% 90%,
+                    rgba(167,139,250,0.45),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #312e81,
+                    #581c87,
+                    #831843
+                );
 
-            padding:
-                60px 6%;
+            background-size: 200% 200%;
+            animation: heroGradient 10s ease infinite;
         }
 
+        @keyframes heroGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating circles */
+
+        .hero::before {
+            content: "";
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            right: -120px;
+            top: -120px;
+
+            animation: circleRotate 12s linear infinite;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.16);
+
+            left: -80px;
+            bottom: -80px;
+
+            animation: circleRotate 9s linear infinite reverse;
+        }
+
+        @keyframes circleRotate {
+            from {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.12);
+            }
+
+            to {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        /* Hero content */
+
+        .hero-text {
+            position: relative;
+            z-index: 5;
+            max-width: 760px;
+
+            animation:
+                heroContent 1.2s
+                cubic-bezier(.17,.67,.35,1.2);
+        }
+
+        @keyframes heroContent {
+            from {
+                opacity: 0;
+                transform:
+                    translateY(70px)
+                    scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        /* Badge */
+
+        .hero-text::before {
+            content:
+                "✨ SMART CIVIC TECHNOLOGY";
+
+            display: inline-block;
+
+            padding: 9px 18px;
+
+            margin-bottom: 22px;
+
+            border-radius: 50px;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            backdrop-filter: blur(12px);
+
+            animation:
+                badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* Heading */
+
         .hero h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            color: white;
 
-            font-size: 36px;
+            margin-bottom: 24px;
 
-            letter-spacing: -1px;
+            letter-spacing: -2px;
+            max-width: 780px;
+
+            animation:
+                titleGlow
+                3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow:
+                    0 0 0
+                    rgba(103,232,249,0);
+            }
+
+            to {
+                text-shadow:
+                    0 0 30px
+                    rgba(103,232,249,0.28);
+            }
+        }
+
+        .hero h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #67e8f9,
+                    #c084fc,
+                    #f9a8d4
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
         }
 
         .hero p {
+            font-size: 20px;
+            line-height: 1.7;
 
-            font-size: 17px;
+            color: #e0e7ff;
+
+            max-width: 650px;
+
+            margin-bottom: 32px;
+
+            animation:
+                paragraphReveal
+                1.5s ease;
         }
 
+        @keyframes paragraphReveal {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main button */
+
+        .hero .btn {
+            padding: 16px 28px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            background-size: 200% 200%;
+
+            box-shadow:
+                0 12px 35px
+                rgba(124,58,237,0.4);
+
+            animation:
+                buttonGradient
+                4s ease infinite;
+
+            transition: 0.35s;
+        }
+
+        @keyframes buttonGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero .btn:hover {
+            transform:
+                translateY(-7px)
+                scale(1.05);
+
+            box-shadow:
+                0 20px 50px
+                rgba(236,72,153,0.45);
+        }
+
+        /* ==============================
+           FLOATING CITY VISUAL
+        ============================== */
+
         .hero-visual {
+            position: absolute;
 
-            width: 280px;
-            height: 280px;
+            right: 7%;
+            top: 50%;
 
-            right: -100px;
+            transform: translateY(-50%);
 
-            top: 75%;
+            width: 350px;
+            height: 350px;
+
+            z-index: 4;
+        }
+
+        .city-orb {
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.20);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 0 80px
+                rgba(34,211,238,0.20),
+
+                inset 0 0 60px
+                rgba(255,255,255,0.06);
+
+            animation:
+                orbFloat
+                5s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
         }
 
         .city-icon {
+            font-size: 125px;
 
-            font-size: 95px;
+            filter:
+                drop-shadow(
+                    0 15px 25px
+                    rgba(0,0,0,0.25)
+                );
+
+            animation:
+                cityPulse
+                3s ease-in-out infinite;
         }
-    }
 
-</style>
-```
+        @keyframes cityPulse {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        /* Floating problem cards */
+
+        .floating-problem {
+            position: absolute;
+
+            padding: 12px 17px;
+
+            border-radius: 13px;
+
+            color: white;
+
+            background:
+                rgba(15,23,42,0.72);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.18);
+
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.25);
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .problem-one {
+            top: 20px;
+            right: -35px;
+
+            animation:
+                problemFloat
+                4s ease-in-out infinite;
+        }
+
+        .problem-two {
+            bottom: 45px;
+            left: -50px;
+
+            animation:
+                problemFloat
+                4s ease-in-out infinite 1s;
+        }
+
+        .problem-three {
+            bottom: -15px;
+            right: 35px;
+
+            animation:
+                problemFloat
+                4s ease-in-out infinite 2s;
+        }
+
+        @keyframes problemFloat {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-11px);
+            }
+        }
+
+        /* ==============================
+           HOW IT WORKS
+        ============================== */
+
+        .section {
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fafc,
+                    #eef2ff
+                );
+        }
+
+        .section h2 {
+            font-size: 34px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #312e81,
+                    #7c3aed,
+                    #be185d
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+        }
+
+        .stats {
+            max-width: 1150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+
+            background:
+                rgba(255,255,255,0.95);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .stat-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            right: -55px;
+            top: -55px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #a78bfa,
+                    #67e8f9
+                );
+
+            opacity: 0.22;
+
+            transition: 0.5s;
+        }
+
+        .stat-card:hover {
+            transform:
+                translateY(-12px)
+                scale(1.03);
+
+            box-shadow:
+                0 25px 55px
+                rgba(76,29,149,0.18);
+        }
+
+        .stat-card:hover::before {
+            transform: scale(1.7);
+            opacity: 0.35;
+        }
+
+        .stat-card h3 {
+            font-size: 40px;
+
+            transition:
+                transform 0.4s ease;
+        }
+
+        .stat-card:hover h3 {
+            transform:
+                scale(1.2)
+                rotate(-5deg);
+        }
+
+        .stat-card p {
+            font-size: 18px;
+            color: #312e81;
+        }
+
+        .stat-card small {
+            display: block;
+            margin-top: 8px;
+
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* ==============================
+           CUSTOMER CARE
+        ============================== */
+
+        .customer-section {
+            position: relative;
+            overflow: hidden;
+
+            padding: 90px 8%;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(34,211,238,0.25),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(236,72,153,0.22),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #f5f3ff,
+                    #ecfeff
+                );
+        }
+
+        .customer-section::before {
+            content: "";
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            border: 2px dashed
+                rgba(124,58,237,0.15);
+
+            top: -150px;
+            left: -80px;
+
+            animation:
+                careRotate
+                15s linear infinite;
+        }
+
+        .customer-section::after {
+            content: "";
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            border: 2px dashed
+                rgba(6,182,212,0.18);
+
+            bottom: -100px;
+            right: -60px;
+
+            animation:
+                careRotate
+                12s linear infinite reverse;
+        }
+
+        @keyframes careRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .customer-title {
+            position: relative;
+            z-index: 2;
+
+            font-size: 38px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #312e81,
+                    #7c3aed,
+                    #be185d
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+
+            margin-bottom: 12px;
+        }
+
+        .customer-subtitle {
+            position: relative;
+            z-index: 2;
+
+            color: #64748b;
+
+            font-size: 17px;
+
+            margin-bottom: 40px;
+        }
+
+        .customer-card {
+            position: relative;
+            z-index: 3;
+
+            max-width: 950px;
+
+            margin: auto;
+
+            padding: 42px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 30px;
+
+            text-align: left;
+
+            border-radius: 28px;
+
+            background:
+                rgba(255,255,255,0.72);
+
+            border:
+                1px solid
+                rgba(124,58,237,0.18);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 70px
+                rgba(49,46,129,0.16);
+
+            transition: .4s;
+
+            animation:
+                customerFloat
+                5s ease-in-out infinite;
+        }
+
+        .customer-card:hover {
+            transform:
+                translateY(-10px)
+                scale(1.01);
+
+            box-shadow:
+                0 35px 90px
+                rgba(124,58,237,0.22);
+        }
+
+        @keyframes customerFloat {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .care-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .care-badge {
+            display: inline-block;
+
+            width: fit-content;
+
+            padding: 8px 15px;
+
+            border-radius: 50px;
+
+            color: #312e81;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #cffafe,
+                    #ede9fe,
+                    #fce7f3
+                );
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 15px;
+
+            animation:
+                careBadge
+                2.5s ease-in-out infinite;
+        }
+
+        @keyframes careBadge {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .care-left h3 {
+            font-size: 31px;
+            color: #1e1b4b;
+
+            margin-bottom: 10px;
+        }
+
+        .care-left p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        .care-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(6,182,212,0.12),
+                    rgba(124,58,237,0.12),
+                    rgba(236,72,153,0.12)
+                );
+        }
+
+        .phone-icon {
+            width: 75px;
+            height: 75px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 34px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(124,58,237,0.30);
+
+            animation:
+                phonePulse
+                1.8s infinite;
+        }
+
+        @keyframes phonePulse {
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+                box-shadow:
+                    0 0 55px
+                    rgba(236,72,153,0.42);
+            }
+        }
+
+        .phone-number {
+            margin: 18px 0 6px;
+
+            font-size: 32px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            color: #312e81;
+        }
+
+        .phone-label {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .call-button {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #06b6d4,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            background-size: 200% 200%;
+
+            animation:
+                callGradient
+                4s ease infinite;
+
+            transition: .35s;
+        }
+
+        @keyframes callGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .call-button:hover {
+            transform:
+                translateY(-5px)
+                scale(1.05);
+
+            box-shadow:
+                0 15px 35px
+                rgba(124,58,237,0.35);
+        }
+
+        .service-incharge {
+            max-width: 950px;
+
+            margin: 25px auto 0;
+
+            padding: 25px;
+
+            position: relative;
+            z-index: 3;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,0.70);
+
+            border:
+                1px solid
+                rgba(236,72,153,0.18);
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(49,46,129,0.10);
+
+            text-align: center;
+        }
+
+        .service-incharge small {
+            color: #7c3aed;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+        }
+
+        .service-incharge h3 {
+            margin-top: 8px;
+
+            font-size: 27px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #06b6d4,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+        }
+
+        .service-incharge p {
+            margin-top: 8px;
+            color: #64748b;
+        }
+
+        /* ==============================
+           CIVIC MESSAGE
+        ============================== */
+
+        .civic-message {
+            padding: 70px 8%;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2ff,
+                    #fdf4ff,
+                    #ecfeff
+                );
+        }
+
+        .civic-message h2 {
+            color: #312e81;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .civic-message p {
+            max-width: 700px;
+            margin: auto;
+
+            color: #64748b;
+
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #312e81,
+                    #581c87,
+                    #831843
+                );
+
+            background-size: 200% 200%;
+
+            animation:
+                footerGradient
+                8s ease infinite;
+        }
+
+        @keyframes footerGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .hero-visual {
+                right: -90px;
+                opacity: 0.25;
+            }
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .customer-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 600px;
+                padding: 60px 6%;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .hero-visual {
+                width: 280px;
+                height: 280px;
+
+                right: -100px;
+                top: 75%;
+            }
+
+            .city-icon {
+                font-size: 95px;
+            }
+
+            .customer-section {
+                padding: 65px 6%;
+            }
+
+            .customer-title {
+                font-size: 30px;
+            }
+
+            .customer-card {
+                padding: 25px 18px;
+            }
+
+            .phone-number {
+                font-size: 25px;
+            }
+
+            .care-left h3 {
+                font-size: 25px;
+            }
+        }
+
+    </style>
 
 </head>
 
@@ -758,113 +1144,106 @@
 
 <header>
 
-```
-<div class="logo">
-    🏙️ CivicFix
-</div>
+    <div class="logo">
+        🏙️ CivicFix
+    </div>
 
+    <nav>
 
-<nav>
+        <a href="index.html">
+            🏠 Home
+        </a>
 
-    <a href="index.html">
-        🏠 Home
-    </a>
+        <a href="report.html">
+            📢 Report Problem
+        </a>
 
-    <a href="report.html">
-        📢 Report Problem
-    </a>
+        <a href="track.html">
+            🔎 Track Complaint
+        </a>
 
-    <a href="track.html">
-        🔎 Track Complaint
-    </a>
+        <a href="dashboard.html">
+            📊 Dashboard
+        </a>
 
-    <a href="dashboard.html">
-        📊 Dashboard
-    </a>
+        <a href="customer-care.html">
+            📞 Customer Care
+        </a>
 
-</nav>
-```
+    </nav>
 
 </header>
 
+
 <!-- =========================
-     HERO SECTION
+     HERO
 ========================= -->
 
 <section class="hero">
 
-```
-<div class="hero-text">
+    <div class="hero-text">
 
-    <h1>
+        <h1>
 
-        Smart Civic Complaint
+            Smart Civic Complaint
 
-        <br>
+            <br>
 
-        & Action
+            & Action
 
-        <span>
-            Tracking System
-        </span>
+            <span>
+                Tracking System
+            </span>
 
-    </h1>
+        </h1>
 
+        <p>
 
-    <p>
+            Report civic problems easily,
+            connect them to the right department,
+            and track every action until the
+            issue is resolved.
 
-        Report civic problems easily,
-        connect them to the right department,
-        and track every action until the
-        issue is resolved.
+        </p>
 
-    </p>
+        <a
+            href="report.html"
+            class="btn"
+        >
 
+            📢 Report a Problem
 
-    <a
-        href="report.html"
-        class="btn"
-    >
+        </a>
 
-        📢 Report a Problem
-
-    </a>
-
-</div>
+    </div>
 
 
+    <div class="hero-visual">
 
-<!-- Floating city visual -->
+        <div class="city-orb">
 
-<div class="hero-visual">
+            <div class="city-icon">
+                🏙️
+            </div>
 
-    <div class="city-orb">
+        </div>
 
-        <div class="city-icon">
-            🏙️
+        <div class="floating-problem problem-one">
+            💡 Street Light
+        </div>
+
+        <div class="floating-problem problem-two">
+            🚧 Road Damage
+        </div>
+
+        <div class="floating-problem problem-three">
+            🗑️ Garbage
         </div>
 
     </div>
 
-
-    <div class="floating-problem problem-one">
-        💡 Street Light
-    </div>
-
-
-    <div class="floating-problem problem-two">
-        🚧 Road Damage
-    </div>
-
-
-    <div class="floating-problem problem-three">
-        🗑️ Garbage
-    </div>
-
-</div>
-```
-
 </section>
+
 
 <!-- =========================
      HOW CIVICFIX WORKS
@@ -872,147 +1251,191 @@
 
 <section class="section">
 
-```
-<h2>
-    How CivicFix Works
-</h2>
+    <h2>
+        How CivicFix Works
+    </h2>
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h3>
+                📢
+            </h3>
+
+            <p>
+                Report Problem
+            </p>
+
+            <small>
+                Submit your civic complaint
+                with the problem details.
+            </small>
+
+        </div>
 
 
-<div class="stats">
+        <div class="stat-card">
+
+            <h3>
+                🏢
+            </h3>
+
+            <p>
+                Department Action
+            </p>
+
+            <small>
+                The complaint reaches the
+                responsible department.
+            </small>
+
+        </div>
 
 
-    <div class="stat-card">
+        <div class="stat-card">
 
-        <h3>
-            📢
-        </h3>
+            <h3>
+                👷
+            </h3>
 
-        <p>
-            Report Problem
-        </p>
+            <p>
+                Worker Assignment
+            </p>
 
-        <small>
-            Submit your civic complaint
-            with the problem details.
-        </small>
+            <small>
+                A worker is assigned to
+                solve the civic issue.
+            </small>
 
-    </div>
-
-
-
-    <div class="stat-card">
-
-        <h3>
-            🏢
-        </h3>
-
-        <p>
-            Department Action
-        </p>
-
-        <small>
-            The complaint reaches the
-            responsible department.
-        </small>
-
-    </div>
+        </div>
 
 
+        <div class="stat-card">
 
-    <div class="stat-card">
+            <h3>
+                📸
+            </h3>
 
-        <h3>
-            👷
-        </h3>
+            <p>
+                Work Proof
+            </p>
 
-        <p>
-            Worker Assignment
-        </p>
+            <small>
+                After-work photo provides
+                proof that action was taken.
+            </small>
 
-        <small>
-            A worker is assigned to
-            solve the civic issue.
-        </small>
-
-    </div>
-
-
-
-    <div class="stat-card">
-
-        <h3>
-            📸
-        </h3>
-
-        <p>
-            Work Proof
-        </p>
-
-        <small>
-            After-work photo provides
-            proof that action was taken.
-        </small>
+        </div>
 
     </div>
-
-
-</div>
-```
 
 </section>
+
 
 <!-- =========================
-     EXTRA CIVIC MESSAGE
+     CUSTOMER CARE
 ========================= -->
 
-<section
-    style="
-        padding:70px 8%;
-        text-align:center;
-        background:
-        linear-gradient(
-            135deg,
-            #eef2ff,
-            #fdf4ff,
-            #ecfeff
-        );
-    "
->
+<section class="customer-section">
 
-```
-<h2
-    style="
-        color:#312e81;
-        font-size:32px;
-        margin-bottom:15px;
-    "
->
+    <h2 class="customer-title">
+        📞 CivicFix Customer Care
+    </h2>
 
-    🌍 Together We Build
-    Better Cities
-
-</h2>
+    <p class="customer-subtitle">
+        Need help? Our support team is ready to assist you.
+    </p>
 
 
-<p
-    style="
-        max-width:700px;
-        margin:auto;
-        color:#64748b;
-        font-size:17px;
-        line-height:1.7;
-    "
->
+    <div class="customer-card">
 
-    Every complaint can become an action.
-    Every action can create a visible change.
-    CivicFix makes the journey simple,
-    transparent and trackable.
+        <div class="care-left">
 
-</p>
-```
+            <div class="care-badge">
+                ✨ QUICK SUPPORT
+            </div>
+
+            <h3>
+                We're Here For You
+            </h3>
+
+            <p>
+                Need help with a complaint,
+                tracking status, or CivicFix service?
+                Contact our customer care team directly.
+            </p>
+
+        </div>
+
+
+        <div class="care-right">
+
+            <div class="phone-icon">
+                📞
+            </div>
+
+            <div class="phone-number">
+                7550365577
+            </div>
+
+            <div class="phone-label">
+                CivicFix Customer Care
+            </div>
+
+            <a
+                href="tel:7550365577"
+                class="call-button"
+            >
+                📞 Call Customer Care
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="service-incharge">
+
+        <small>
+            ⭐ SERVICE INCHARGE
+        </small>
+
+        <h3>
+            ILANDHIRAIYAN N
+        </h3>
+
+        <p>
+            “Your voice, my responsibility.
+            Together, let's build a better city.”
+        </p>
+
+    </div>
 
 </section>
+
+
+<!-- =========================
+     CIVIC MESSAGE
+========================= -->
+
+<section class="civic-message">
+
+    <h2>
+        🌍 Together We Build Better Cities
+    </h2>
+
+    <p>
+
+        Every complaint can become an action.
+        Every action can create a visible change.
+        CivicFix makes the journey simple,
+        transparent and trackable.
+
+    </p>
+
+</section>
+
 
 <!-- =========================
      FOOTER
@@ -1020,24 +1443,22 @@
 
 <footer>
 
-```
-<h3>
-    🏙️ CivicFix
-</h3>
+    <h3>
+        🏙️ CivicFix
+    </h3>
 
+    <p>
+        Smart Civic Complaint & Action Tracking System
+    </p>
 
-<p>
-    Smart Civic Complaint & Action Tracking System
-</p>
-
-
-<p>
-    Making civic issue reporting simple and trackable.
-</p>
-```
+    <p>
+        Making civic issue reporting simple and trackable.
+    </p>
 
 </footer>
+
 
 </body>
 
 </html>
+```

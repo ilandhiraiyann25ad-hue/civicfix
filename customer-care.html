@@ -1,0 +1,2406 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>CivicFix | Customer Care</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    min-height:100vh;
+    color:#0f172a;
+    overflow-x:hidden;
+    background:#f8fafc;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    padding:18px 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(15,23,42,.94);
+
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+        1px solid rgba(103,232,249,.25);
+
+    box-shadow:
+        0 5px 30px rgba(15,23,42,.18);
+}
+
+.logo{
+
+    font-size:30px;
+    font-weight:900;
+    color:white;
+}
+
+.logo span{
+
+    background:
+        linear-gradient(
+            90deg,
+            #67e8f9,
+            #c084fc,
+            #f9a8d4
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+nav{
+
+    display:flex;
+    gap:20px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+nav button{
+
+    border:none;
+    background:none;
+
+    color:white;
+
+    font-size:14px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+nav button:hover{
+
+    color:#67e8f9;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    padding:90px 20px 80px;
+
+    color:white;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(103,232,249,.25),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(192,132,252,.30),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(249,168,212,.22),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #312e81,
+            #581c87,
+            #831843
+        );
+}
+
+.hero::before,
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    border-radius:50%;
+
+    filter:blur(35px);
+
+    opacity:.35;
+
+    animation:
+        floating 6s infinite alternate ease-in-out;
+}
+
+.hero::before{
+
+    background:#67e8f9;
+
+    left:-80px;
+    top:40px;
+}
+
+.hero::after{
+
+    background:#f9a8d4;
+
+    right:-80px;
+    bottom:20px;
+
+    animation-delay:2s;
+}
+
+@keyframes floating{
+
+    from{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    to{
+        transform:
+            translateY(55px)
+            rotate(20deg);
+    }
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.hero small{
+
+    display:inline-block;
+
+    padding:10px 20px;
+
+    border-radius:30px;
+
+    color:#67e8f9;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    font-weight:bold;
+
+    animation:
+        glow 2s infinite alternate;
+}
+
+@keyframes glow{
+
+    from{
+        box-shadow:
+            0 0 0 rgba(103,232,249,0);
+    }
+
+    to{
+        box-shadow:
+            0 0 25px rgba(103,232,249,.25);
+    }
+}
+
+.hero h1{
+
+    font-size:
+        clamp(48px,8vw,82px);
+
+    margin:20px 0;
+
+    font-weight:900;
+
+    animation:
+        fadeUp 1s ease;
+}
+
+.hero h1 span{
+
+    color:#67e8f9;
+
+    text-shadow:
+        0 0 20px rgba(103,232,249,.7),
+        0 0 50px rgba(192,132,252,.35);
+}
+
+.hero p{
+
+    font-size:20px;
+
+    color:#e2e8f0;
+
+    animation:
+        fadeUp 1.3s ease;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+
+    width:min(1100px,92%);
+
+    margin:auto;
+
+    padding:70px 0;
+}
+
+
+/* =========================
+   CONTACT CARD
+========================= */
+
+.contact-card{
+
+    position:relative;
+
+    max-width:850px;
+
+    margin:
+        0 auto 55px;
+
+    padding:50px 30px;
+
+    text-align:center;
+
+    border-radius:35px;
+
+    background:white;
+
+    border:
+        1px solid #e0e7ff;
+
+    box-shadow:
+        0 25px 70px rgba(49,46,129,.15);
+
+    overflow:hidden;
+
+    animation:
+        cardFloat 4s infinite ease-in-out;
+}
+
+.contact-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+        rgba(103,232,249,.15);
+
+    filter:blur(50px);
+
+    top:-150px;
+    left:-100px;
+}
+
+.contact-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:
+        rgba(192,132,252,.15);
+
+    filter:blur(50px);
+
+    right:-100px;
+    bottom:-150px;
+}
+
+@keyframes cardFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.phone-icon{
+
+    position:relative;
+    z-index:2;
+
+    width:100px;
+    height:100px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-size:45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    box-shadow:
+        0 15px 40px rgba(124,58,237,.35);
+
+    animation:
+        phonePulse 2s infinite;
+}
+
+@keyframes phonePulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+}
+
+.phone-number{
+
+    position:relative;
+    z-index:2;
+
+    margin:25px 0 10px;
+
+    font-size:
+        clamp(35px,7vw,65px);
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    letter-spacing:2px;
+}
+
+.contact-text{
+
+    position:relative;
+    z-index:2;
+
+    color:#64748b;
+
+    font-size:17px;
+
+    margin-bottom:28px;
+}
+
+.call-btn{
+
+    position:relative;
+    z-index:2;
+
+    display:inline-block;
+
+    padding:17px 35px;
+
+    border-radius:50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    box-shadow:
+        0 10px 30px rgba(124,58,237,.3);
+
+    transition:.35s;
+}
+
+.call-btn:hover{
+
+    transform:
+        translateY(-5px)
+        scale(1.05);
+
+    box-shadow:
+        0 18px 40px rgba(124,58,237,.4);
+}
+
+
+/* =========================
+   SERVICE INCHARGE
+========================= */
+
+.incharge{
+
+    position:relative;
+
+    max-width:850px;
+
+    margin:
+        0 auto 75px;
+
+    padding:40px 25px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #312e81,
+            #581c87,
+            #831843
+        );
+
+    box-shadow:
+        0 25px 60px rgba(88,28,135,.25);
+
+    overflow:hidden;
+}
+
+.incharge::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    background:#67e8f9;
+
+    opacity:.15;
+
+    filter:blur(30px);
+
+    top:-60px;
+    right:-40px;
+
+    animation:
+        rotateBlob 6s linear infinite;
+}
+
+@keyframes rotateBlob{
+
+    to{
+        transform:
+            rotate(360deg)
+            translateX(30px);
+    }
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:9px 20px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    color:#67e8f9;
+
+    font-weight:bold;
+
+    margin-bottom:18px;
+}
+
+.incharge h2{
+
+    position:relative;
+
+    font-size:38px;
+
+    margin-bottom:15px;
+}
+
+.quote{
+
+    position:relative;
+
+    color:#e2e8f0;
+
+    font-size:17px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   HELP SECTION
+========================= */
+
+.support{
+
+    text-align:center;
+}
+
+.support h2{
+
+    font-size:40px;
+
+    margin-bottom:40px;
+
+    color:#0f172a;
+}
+
+.support h2 span{
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px,1fr)
+        );
+
+    gap:22px;
+}
+
+
+/* =========================
+   HELP CARDS
+========================= */
+
+.box{
+
+    position:relative;
+
+    padding:30px 20px;
+
+    background:white;
+
+    border-radius:25px;
+
+    border:
+        1px solid #e2e8f0;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.08);
+
+    transition:.4s;
+
+    cursor:pointer;
+
+    overflow:hidden;
+}
+
+.box::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+    height:110px;
+
+    border-radius:50%;
+
+    background:#67e8f9;
+
+    opacity:.12;
+
+    filter:blur(25px);
+
+    top:-40px;
+    right:-30px;
+
+    transition:.5s;
+}
+
+.box:hover::before{
+
+    transform:scale(2.2);
+}
+
+.box:hover{
+
+    transform:
+        translateY(-12px)
+        scale(1.02);
+
+    border-color:#c084fc;
+
+    box-shadow:
+        0 25px 55px rgba(124,58,237,.18);
+}
+
+.box .icon{
+
+    position:relative;
+
+    z-index:2;
+
+    width:70px;
+    height:70px;
+
+    margin:
+        0 auto 18px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    font-size:34px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #cffafe,
+            #ede9fe,
+            #fce7f3
+        );
+
+    transition:.4s;
+}
+
+.box:hover .icon{
+
+    transform:
+        rotate(8deg)
+        scale(1.1);
+}
+
+.box h3{
+
+    position:relative;
+    z-index:2;
+
+    margin-bottom:10px;
+
+    color:#1e293b;
+
+    font-size:19px;
+}
+
+.box p{
+
+    position:relative;
+    z-index:2;
+
+    color:#64748b;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    margin-bottom:15px;
+}
+
+.action{
+
+    position:relative;
+    z-index:2;
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed
+        );
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   QUICK CONTACT
+========================= */
+
+.quick-contact{
+
+    margin-top:60px;
+
+    padding:40px 20px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #312e81,
+            #581c87
+        );
+
+    box-shadow:
+        0 20px 50px rgba(49,46,129,.25);
+}
+
+.quick-contact h2{
+
+    margin-bottom:10px;
+}
+
+.quick-contact p{
+
+    color:#cbd5e1;
+
+    margin-bottom:22px;
+}
+
+.quick-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.quick-buttons button{
+
+    border:none;
+
+    padding:13px 25px;
+
+    border-radius:30px;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    transition:.3s;
+}
+
+.quick-buttons button:hover{
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:5000;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(15,23,42,.72);
+
+    backdrop-filter:blur(10px);
+}
+
+.modal.active{
+
+    display:flex;
+
+    animation:
+        modalFade .25s ease;
+}
+
+@keyframes modalFade{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+.modal-box{
+
+    position:relative;
+
+    width:min(550px,100%);
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    padding:35px 25px;
+
+    border-radius:30px;
+
+    background:white;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.3);
+
+    animation:
+        modalUp .35s ease;
+}
+
+@keyframes modalUp{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(40px)
+            scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.close-btn{
+
+    position:absolute;
+
+    top:15px;
+    right:18px;
+
+    width:40px;
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f1f5f9;
+
+    color:#0f172a;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.close-btn:hover{
+
+    background:#e2e8f0;
+
+    transform:rotate(90deg);
+}
+
+.modal-icon{
+
+    width:75px;
+    height:75px;
+
+    margin:
+        0 auto 18px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    font-size:35px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #cffafe,
+            #ede9fe,
+            #fce7f3
+        );
+}
+
+.modal-box h2{
+
+    text-align:center;
+
+    font-size:28px;
+
+    margin-bottom:12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.modal-box > p{
+
+    text-align:center;
+
+    color:#64748b;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+}
+
+
+/* =========================
+   MODAL BUTTONS
+========================= */
+
+.modal-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.modal-actions button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:15px;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        );
+
+    transition:.3s;
+}
+
+.modal-actions button:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(124,58,237,.25);
+}
+
+
+/* =========================
+   FEEDBACK FORM
+========================= */
+
+.form-group{
+
+    margin-bottom:16px;
+
+    text-align:left;
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#334155;
+
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+
+    width:100%;
+
+    padding:13px 15px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-family:Arial,sans-serif;
+
+    font-size:14px;
+
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+
+    border-color:#7c3aed;
+
+    box-shadow:
+        0 0 0 3px rgba(124,58,237,.1);
+}
+
+.form-group textarea{
+
+    min-height:120px;
+
+    resize:vertical;
+}
+
+.success-message{
+
+    display:none;
+
+    margin-top:15px;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    color:#166534;
+
+    background:#dcfce7;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    margin-top:30px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    background:#0f172a;
+
+    border-top:
+        3px solid transparent;
+
+    border-image:
+        linear-gradient(
+            90deg,
+            #06b6d4,
+            #7c3aed,
+            #ec4899
+        ) 1;
+}
+
+footer strong{
+
+    background:
+        linear-gradient(
+            90deg,
+            #67e8f9,
+            #c084fc,
+            #f9a8d4
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px){
+
+    header{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        padding:18px 15px;
+    }
+
+    nav{
+
+        gap:10px;
+    }
+
+    nav button{
+
+        font-size:12px;
+    }
+
+    .hero{
+
+        padding:65px 15px;
+    }
+
+    .hero h1{
+
+        font-size:50px;
+    }
+
+    .main{
+
+        padding:50px 0;
+    }
+
+    .contact-card{
+
+        padding:40px 18px;
+    }
+
+    .phone-number{
+
+        font-size:38px;
+    }
+
+    .incharge h2{
+
+        font-size:29px;
+    }
+
+    .support h2{
+
+        font-size:32px;
+    }
+
+    .modal-box{
+
+        padding:35px 18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        🏙️ Civic<span>Fix</span>
+    </div>
+
+    <nav>
+
+        <button onclick="showHome()">
+            🏠 Home
+        </button>
+
+        <button onclick="openReportHelp()">
+            📢 Report
+        </button>
+
+        <button onclick="openTrackHelp()">
+            🔎 Track
+        </button>
+
+        <button onclick="openDashboardHelp()">
+            📊 Dashboard
+        </button>
+
+        <button onclick="scrollToHelp()">
+            📞 Customer Care
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <small>
+            NEED HELP? WE'RE JUST A CALL AWAY!
+        </small>
+
+        <h1>
+            Customer <span>Care</span>
+        </h1>
+
+        <p>
+            Your concerns matter. CivicFix is here to support you.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+    <!-- CUSTOMER CARE -->
+
+    <section class="contact-card">
+
+        <div class="phone-icon">
+            📞
+        </div>
+
+        <div class="phone-number">
+            7550365577
+        </div>
+
+        <p class="contact-text">
+            Quick Support • Complaint Assistance • Service Help
+        </p>
+
+        <button
+            class="call-btn"
+            onclick="openCallModal()">
+
+            📞 Call Customer Care
+
+        </button>
+
+    </section>
+
+
+    <!-- SERVICE INCHARGE -->
+
+    <section class="incharge">
+
+        <div class="badge">
+            ⭐ SERVICE INCHARGE
+        </div>
+
+        <h2>
+            ILANDHIRAIYAN N
+        </h2>
+
+        <p class="quote">
+
+            “Your voice, my responsibility.<br>
+
+            Let's make our city better together.”
+
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         HELP SECTION
+    ========================= -->
+
+    <section
+        class="support"
+        id="helpSection">
+
+        <h2>
+            How We Can
+            <span>Help You?</span>
+        </h2>
+
+        <div class="grid">
+
+
+            <!-- COMPLAINT -->
+
+            <div
+                class="box"
+                onclick="openComplaintSupport()">
+
+                <div class="icon">
+                    📋
+                </div>
+
+                <h3>
+                    Complaint Support
+                </h3>
+
+                <p>
+                    Get help with reporting and tracking complaints.
+                </p>
+
+                <span class="action">
+                    GET SUPPORT →
+                </span>
+
+            </div>
+
+
+            <!-- GENERAL -->
+
+            <div
+                class="box"
+                onclick="openGeneralSupport()">
+
+                <div class="icon">
+                    🎧
+                </div>
+
+                <h3>
+                    General Enquiries
+                </h3>
+
+                <p>
+                    Ask questions about CivicFix services.
+                </p>
+
+                <span class="action">
+                    ASK NOW →
+                </span>
+
+            </div>
+
+
+            <!-- SERVICE -->
+
+            <div
+                class="box"
+                onclick="openServiceSupport()">
+
+                <div class="icon">
+                    ⚙️
+                </div>
+
+                <h3>
+                    Service Help
+                </h3>
+
+                <p>
+                    Get assistance with civic service problems.
+                </p>
+
+                <span class="action">
+                    GET HELP →
+                </span>
+
+            </div>
+
+
+            <!-- FEEDBACK -->
+
+            <div
+                class="box"
+                onclick="openFeedback()">
+
+                <div class="icon">
+                    💬
+                </div>
+
+                <h3>
+                    Feedback
+                </h3>
+
+                <p>
+                    Share your feedback directly inside CivicFix.
+                </p>
+
+                <span class="action">
+                    GIVE FEEDBACK →
+                </span>
+
+            </div>
+
+
+            <!-- URGENT -->
+
+            <div
+                class="box"
+                onclick="openUrgentSupport()">
+
+                <div class="icon">
+                    🚨
+                </div>
+
+                <h3>
+                    Urgent Support
+                </h3>
+
+                <p>
+                    Get immediate customer care assistance.
+                </p>
+
+                <span class="action">
+                    GET SUPPORT →
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUICK CONTACT
+    ========================= -->
+
+    <section class="quick-contact">
+
+        <h2>
+            Need Immediate Assistance?
+        </h2>
+
+        <p>
+            Choose an option below. Everything works inside this page.
+        </p>
+
+        <div class="quick-buttons">
+
+            <button onclick="openCallModal()">
+                📞 Customer Care
+            </button>
+
+            <button onclick="openComplaintSupport()">
+                📋 Complaint Support
+            </button>
+
+            <button onclick="openFeedback()">
+                💬 Give Feedback
+            </button>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="modal"
+    onclick="closeModalOutside(event)">
+
+    <div
+        class="modal-box"
+        id="modalBox">
+
+        <button
+            class="close-btn"
+            onclick="closeModal()">
+
+            ×
+
+        </button>
+
+        <div
+            class="modal-icon"
+            id="modalIcon">
+
+            📞
+
+        </div>
+
+        <h2 id="modalTitle">
+            Customer Care
+        </h2>
+
+        <p id="modalText">
+            How can we help you?
+        </p>
+
+        <div
+            class="modal-actions"
+            id="modalActions">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <strong>CivicFix</strong>
+    — People • Problems • Progress
+
+    <br><br>
+
+    Customer Care:
+    <strong>7550365577</strong>
+
+    <br><br>
+
+    Service Incharge:
+    <strong>ILANDHIRAIYAN N</strong>
+
+    <br><br>
+
+    © 2026 CivicFix. All Rights Reserved.
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+/* =========================
+   MODAL FUNCTIONS
+========================= */
+
+const modal =
+    document.getElementById("modal");
+
+const modalIcon =
+    document.getElementById("modalIcon");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalText =
+    document.getElementById("modalText");
+
+const modalActions =
+    document.getElementById("modalActions");
+
+
+function openModal(
+    icon,
+    title,
+    text,
+    buttons
+){
+
+    modalIcon.innerText = icon;
+
+    modalTitle.innerText = title;
+
+    modalText.innerText = text;
+
+    modalActions.innerHTML = "";
+
+    buttons.forEach(function(button){
+
+        const btn =
+            document.createElement("button");
+
+        btn.innerText =
+            button.text;
+
+        btn.onclick =
+            button.action;
+
+        modalActions.appendChild(btn);
+
+    });
+
+    modal.classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function closeModal(){
+
+    modal.classList.remove("active");
+
+    document.body.style.overflow =
+        "auto";
+}
+
+
+function closeModalOutside(event){
+
+    if(event.target === modal){
+
+        closeModal();
+
+    }
+
+}
+
+
+/* =========================
+   CUSTOMER CARE
+========================= */
+
+function openCallModal(){
+
+    openModal(
+
+        "📞",
+
+        "Customer Care",
+
+        "CivicFix Customer Care: 7550365577",
+
+        [
+
+            {
+                text:"📞 Call 7550365577",
+                action:function(){
+
+                    /*
+                       Browser/device may ask
+                       permission to handle call.
+                    */
+
+                    window.location.href =
+                        "tel:7550365577";
+
+                }
+            },
+
+            {
+                text:"✕ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+/* =========================
+   COMPLAINT SUPPORT
+========================= */
+
+function openComplaintSupport(){
+
+    openModal(
+
+        "📋",
+
+        "Complaint Support",
+
+        "What do you need help with?",
+
+        [
+
+            {
+                text:"📝 Report a Civic Problem",
+                action:function(){
+
+                    showInternalMessage(
+                        "To report a new complaint, use the Report Problem page from your CivicFix website."
+                    );
+
+                }
+            },
+
+            {
+                text:"🔎 Track Existing Complaint",
+                action:function(){
+
+                    showInternalMessage(
+                        "To track your complaint, use your Complaint ID in the Track Complaint page."
+                    );
+
+                }
+            },
+
+            {
+                text:"📞 Contact Customer Care",
+                action:openCallModal
+            },
+
+            {
+                text:"✕ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+/* =========================
+   GENERAL ENQUIRIES
+========================= */
+
+function openGeneralSupport(){
+
+    openModal(
+
+        "🎧",
+
+        "General Enquiries",
+
+        "Choose what you would like to know.",
+
+        [
+
+            {
+                text:"📋 Complaint Information",
+                action:function(){
+
+                    showInternalMessage(
+                        "CivicFix allows citizens to report civic problems and track their complaint status."
+                    );
+
+                }
+            },
+
+            {
+                text:"🏢 Service Information",
+                action:function(){
+
+                    showInternalMessage(
+                        "CivicFix connects reported civic problems with the appropriate department."
+                    );
+
+                }
+            },
+
+            {
+                text:"📞 Talk to Customer Care",
+                action:openCallModal
+            },
+
+            {
+                text:"✕ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+/* =========================
+   SERVICE HELP
+========================= */
+
+function openServiceSupport(){
+
+    openModal(
+
+        "⚙️",
+
+        "Service Help",
+
+        "CivicFix service assistance.",
+
+        [
+
+            {
+                text:"📋 Complaint Assistance",
+                action:function(){
+
+                    showInternalMessage(
+                        "Need help submitting a complaint? Customer Care can assist you with the complaint process."
+                    );
+
+                }
+            },
+
+            {
+                text:"🔎 Tracking Assistance",
+                action:function(){
+
+                    showInternalMessage(
+                        "Keep your Complaint ID safe. It can be used to check the latest complaint status."
+                    );
+
+                }
+            },
+
+            {
+                text:"📞 Get Customer Care Help",
+                action:openCallModal
+            },
+
+            {
+                text:"✕ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+/* =========================
+   URGENT SUPPORT
+========================= */
+
+function openUrgentSupport(){
+
+    openModal(
+
+        "🚨",
+
+        "Urgent Support",
+
+        "For urgent civic service assistance, contact CivicFix Customer Care.",
+
+        [
+
+            {
+                text:"📞 Call Customer Care",
+                action:openCallModal
+            },
+
+            {
+                text:"📋 Complaint Support",
+                action:openComplaintSupport
+            },
+
+            {
+                text:"✕ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+/* =========================
+   FEEDBACK
+========================= */
+
+function openFeedback(){
+
+    modalIcon.innerText = "💬";
+
+    modalTitle.innerText =
+        "CivicFix Feedback";
+
+    modalText.innerText =
+        "Tell us what you think about CivicFix.";
+
+    modalActions.innerHTML = `
+
+        <div class="form-group">
+
+            <label>
+                Your Name
+            </label>
+
+            <input
+                type="text"
+                id="feedbackName"
+                placeholder="Enter your name"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Feedback Type
+            </label>
+
+            <select id="feedbackType">
+
+                <option value="">
+                    Select feedback type
+                </option>
+
+                <option>
+                    Website
+                </option>
+
+                <option>
+                    Complaint Service
+                </option>
+
+                <option>
+                    Customer Care
+                </option>
+
+                <option>
+                    General Suggestion
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Your Feedback
+            </label>
+
+            <textarea
+                id="feedbackMessage"
+                placeholder="Write your feedback here..."
+            ></textarea>
+
+        </div>
+
+        <button
+            onclick="submitFeedback()">
+
+            🚀 Submit Feedback
+
+        </button>
+
+        <button
+            onclick="closeModal()">
+
+            ✕ Close
+
+        </button>
+
+        <div
+            class="success-message"
+            id="feedbackSuccess">
+
+            ✅ Thank you! Your feedback has been recorded on this page.
+
+        </div>
+
+    `;
+
+    modal.classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+/* =========================
+   SUBMIT FEEDBACK
+========================= */
+
+function submitFeedback(){
+
+    const name =
+        document.getElementById(
+            "feedbackName"
+        ).value.trim();
+
+    const type =
+        document.getElementById(
+            "feedbackType"
+        ).value;
+
+    const message =
+        document.getElementById(
+            "feedbackMessage"
+        ).value.trim();
+
+    if(name === ""){
+
+        alert(
+            "Please enter your name."
+        );
+
+        return;
+    }
+
+    if(type === ""){
+
+        alert(
+            "Please select feedback type."
+        );
+
+        return;
+    }
+
+    if(message === ""){
+
+        alert(
+            "Please enter your feedback."
+        );
+
+        return;
+    }
+
+    /*
+       Save feedback locally so
+       it stays available on this browser.
+    */
+
+    const feedback = {
+
+        name:name,
+
+        type:type,
+
+        message:message,
+
+        date:new Date().toLocaleString()
+
+    };
+
+    const oldFeedback =
+        JSON.parse(
+            localStorage.getItem(
+                "civicfixFeedback"
+            )
+        ) || [];
+
+    oldFeedback.push(feedback);
+
+    localStorage.setItem(
+        "civicfixFeedback",
+        JSON.stringify(oldFeedback)
+    );
+
+    document.getElementById(
+        "feedbackSuccess"
+    ).style.display = "block";
+
+}
+
+
+/* =========================
+   INTERNAL MESSAGE
+========================= */
+
+function showInternalMessage(message){
+
+    modalIcon.innerText = "✅";
+
+    modalTitle.innerText =
+        "CivicFix Support";
+
+    modalText.innerText =
+        message;
+
+    modalActions.innerHTML = `
+
+        <button onclick="closeModal()">
+            ✓ Got It
+        </button>
+
+        <button onclick="openCallModal()">
+            📞 Contact Customer Care
+        </button>
+
+    `;
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function scrollToHelp(){
+
+    document.getElementById(
+        "helpSection"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/*
+   These buttons intentionally
+   stay inside this page.
+*/
+
+function showHome(){
+
+    closeModal();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function openReportHelp(){
+
+    openComplaintSupport();
+
+}
+
+
+function openTrackHelp(){
+
+    openModal(
+
+        "🔎",
+
+        "Track Complaint",
+
+        "To track your complaint, keep your Complaint ID ready.",
+
+        [
+
+            {
+                text:"📞 Get Tracking Help",
+                action:openCallModal
+            },
+
+            {
+                text:"✓ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+function openDashboardHelp(){
+
+    openModal(
+
+        "📊",
+
+        "Dashboard",
+
+        "The CivicFix dashboard is used to monitor complaint progress and service activity.",
+
+        [
+
+            {
+                text:"📞 Get Dashboard Help",
+                action:openCallModal
+            },
+
+            {
+                text:"✓ Close",
+                action:closeModal
+            }
+
+        ]
+
+    );
+
+}
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>
+```
