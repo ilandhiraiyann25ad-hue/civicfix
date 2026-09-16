@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,39 +59,27 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Floating circles */
-
         .hero::before {
             content: "";
             position: absolute;
-
             width: 420px;
             height: 420px;
-
             border-radius: 50%;
-
             border: 1px solid rgba(255,255,255,0.18);
-
             right: -120px;
             top: -120px;
-
             animation: circleRotate 12s linear infinite;
         }
 
         .hero::after {
             content: "";
             position: absolute;
-
             width: 250px;
             height: 250px;
-
             border-radius: 50%;
-
             border: 1px solid rgba(255,255,255,0.16);
-
             left: -80px;
             bottom: -80px;
-
             animation: circleRotate 9s linear infinite reverse;
         }
 
@@ -109,8 +96,6 @@
                 transform: rotate(360deg) scale(1);
             }
         }
-
-        /* Hero content */
 
         .hero-text {
             position: relative;
@@ -138,25 +123,17 @@
             }
         }
 
-        /* Badge */
-
         .hero-text::before {
             content:
                 "✨ SMART CIVIC TECHNOLOGY";
 
             display: inline-block;
-
             padding: 9px 18px;
-
             margin-bottom: 22px;
-
             border-radius: 50px;
-
             color: white;
-
             font-size: 13px;
             font-weight: 700;
-
             letter-spacing: 1px;
 
             background:
@@ -182,15 +159,11 @@
             }
         }
 
-        /* Heading */
-
         .hero h1 {
             font-size: 55px;
             line-height: 1.1;
             color: white;
-
             margin-bottom: 24px;
-
             letter-spacing: -2px;
             max-width: 780px;
 
@@ -224,18 +197,14 @@
 
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-
             background-clip: text;
         }
 
         .hero p {
             font-size: 20px;
             line-height: 1.7;
-
             color: #e0e7ff;
-
             max-width: 650px;
-
             margin-bottom: 32px;
 
             animation:
@@ -255,11 +224,8 @@
             }
         }
 
-        /* Main button */
-
         .hero .btn {
             padding: 16px 28px;
-
             border-radius: 12px;
 
             background:
@@ -307,32 +273,21 @@
                 rgba(236,72,153,0.45);
         }
 
-        /* ==============================
-           FLOATING CITY VISUAL
-        ============================== */
-
         .hero-visual {
             position: absolute;
-
             right: 7%;
             top: 50%;
-
             transform: translateY(-50%);
-
             width: 350px;
             height: 350px;
-
             z-index: 4;
         }
 
         .city-orb {
             width: 100%;
             height: 100%;
-
             border-radius: 50%;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -391,15 +346,10 @@
             }
         }
 
-        /* Floating problem cards */
-
         .floating-problem {
             position: absolute;
-
             padding: 12px 17px;
-
             border-radius: 13px;
-
             color: white;
 
             background:
@@ -416,9 +366,7 @@
                 rgba(0,0,0,0.25);
 
             font-size: 13px;
-
             font-weight: 700;
-
             white-space: nowrap;
         }
 
@@ -459,10 +407,6 @@
             }
         }
 
-        /* ==============================
-           HOW IT WORKS
-        ============================== */
-
         .section {
             background:
                 linear-gradient(
@@ -485,7 +429,6 @@
 
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-
             background-clip: text;
         }
 
@@ -670,7 +613,6 @@
 
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-
             background-clip: text;
 
             margin-bottom: 12px;
@@ -681,9 +623,7 @@
             z-index: 2;
 
             color: #64748b;
-
             font-size: 17px;
-
             margin-bottom: 40px;
         }
 
@@ -692,16 +632,11 @@
             z-index: 3;
 
             max-width: 950px;
-
             margin: auto;
-
             padding: 42px;
 
             display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
 
             text-align: left;
@@ -756,11 +691,9 @@
 
         .care-badge {
             display: inline-block;
-
             width: fit-content;
 
             padding: 8px 15px;
-
             border-radius: 50px;
 
             color: #312e81;
@@ -775,9 +708,7 @@
 
             font-size: 12px;
             font-weight: 800;
-
             letter-spacing: 1px;
-
             margin-bottom: 15px;
 
             animation:
@@ -798,7 +729,6 @@
         .care-left h3 {
             font-size: 31px;
             color: #1e1b4b;
-
             margin-bottom: 10px;
         }
 
@@ -814,7 +744,6 @@
             align-items: center;
 
             padding: 25px;
-
             border-radius: 22px;
 
             background:
@@ -862,6 +791,7 @@
 
             50% {
                 transform: scale(1.1);
+
                 box-shadow:
                     0 0 55px
                     rgba(236,72,153,0.42);
@@ -872,9 +802,7 @@
             margin: 18px 0 6px;
 
             font-size: 32px;
-
             font-weight: 900;
-
             letter-spacing: 2px;
 
             color: #312e81;
@@ -893,9 +821,7 @@
             border-radius: 50px;
 
             text-decoration: none;
-
             color: white;
-
             font-weight: 800;
 
             background:
@@ -969,15 +895,12 @@
 
         .service-incharge small {
             color: #7c3aed;
-
             font-weight: 800;
-
             letter-spacing: 1.5px;
         }
 
         .service-incharge h3 {
             margin-top: 8px;
-
             font-size: 27px;
 
             background:
@@ -990,7 +913,6 @@
 
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-
             background-clip: text;
         }
 
@@ -998,10 +920,6 @@
             margin-top: 8px;
             color: #64748b;
         }
-
-        /* ==============================
-           CIVIC MESSAGE
-        ============================== */
 
         .civic-message {
             padding: 70px 8%;
@@ -1031,10 +949,6 @@
             font-size: 17px;
             line-height: 1.7;
         }
-
-        /* ==============================
-           FOOTER
-        ============================== */
 
         footer {
             background:
@@ -1068,8 +982,300 @@
         }
 
         /* ==============================
-           MOBILE
+           CIVICFIX AI ASSISTANT
         ============================== */
+
+        #civicAiButton {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            width: 65px;
+            height: 65px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            color: white;
+            font-size: 30px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.30);
+
+            z-index: 9999;
+
+            transition: .3s;
+
+            animation:
+                aiButtonPulse
+                2.5s ease-in-out infinite;
+        }
+
+        #civicAiButton:hover {
+            transform:
+                scale(1.12)
+                rotate(5deg);
+        }
+
+        @keyframes aiButtonPulse {
+            0%,100% {
+                box-shadow:
+                    0 10px 30px
+                    rgba(0,0,0,0.30);
+            }
+
+            50% {
+                box-shadow:
+                    0 10px 45px
+                    rgba(124,58,237,0.60);
+            }
+        }
+
+        #civicAiChat {
+            position: fixed;
+
+            right: 25px;
+            bottom: 105px;
+
+            width: 350px;
+            height: 500px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.30);
+
+            z-index: 9998;
+
+            display: none;
+
+            flex-direction: column;
+
+            border:
+                1px solid
+                rgba(124,58,237,0.15);
+        }
+
+        .ai-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #312e81,
+                    #581c87,
+                    #831843
+                );
+
+            color: white;
+
+            padding: 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-header strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .ai-header small {
+            display: block;
+            margin-top: 3px;
+            opacity: .8;
+            font-size: 12px;
+        }
+
+        .ai-header button {
+            border: none;
+            background: transparent;
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            transition: .3s;
+        }
+
+        .ai-header button:hover {
+            background:
+                rgba(255,255,255,0.15);
+
+            transform: rotate(90deg);
+        }
+
+        .ai-messages {
+            flex: 1;
+
+            padding: 15px;
+
+            overflow-y: auto;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fafc,
+                    #eef2ff
+                );
+        }
+
+        .ai-message {
+            max-width: 85%;
+
+            padding: 12px 14px;
+
+            margin-bottom: 12px;
+
+            border-radius: 15px;
+
+            line-height: 1.5;
+
+            font-size: 14px;
+
+            white-space: pre-wrap;
+
+            word-wrap: break-word;
+
+            animation:
+                aiMessageIn
+                .3s ease;
+        }
+
+        @keyframes aiMessageIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-message.bot {
+            background:
+                #eef2ff;
+
+            color:
+                #1e1b4b;
+
+            border-bottom-left-radius:
+                4px;
+
+            border:
+                1px solid
+                rgba(124,58,237,0.08);
+        }
+
+        .ai-message.user {
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            color: white;
+
+            margin-left: auto;
+
+            border-bottom-right-radius:
+                4px;
+        }
+
+        .ai-input-area {
+            display: flex;
+
+            padding: 12px;
+
+            gap: 8px;
+
+            border-top:
+                1px solid #e5e7eb;
+
+            background: white;
+        }
+
+        .ai-input-area input {
+            flex: 1;
+
+            padding: 12px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .ai-input-area input:focus {
+            border-color:
+                #7c3aed;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(124,58,237,0.10);
+        }
+
+        .ai-input-area button {
+            width: 45px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #06b6d4,
+                    #7c3aed,
+                    #ec4899
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .ai-input-area button:hover {
+            transform:
+                scale(1.08);
+        }
 
         @media (max-width: 900px) {
 
@@ -1134,6 +1340,29 @@
             .care-left h3 {
                 font-size: 25px;
             }
+
+            #civicAiChat {
+                right: 10px;
+                left: 10px;
+
+                bottom: 90px;
+
+                width: auto;
+
+                height: 70vh;
+
+                max-height: 560px;
+
+                border-radius: 18px;
+            }
+
+            #civicAiButton {
+                right: 18px;
+                bottom: 18px;
+
+                width: 60px;
+                height: 60px;
+            }
         }
 
     </style>
@@ -1174,10 +1403,6 @@
 
 </header>
 
-
-<!-- =========================
-     HERO
-========================= -->
 
 <section class="hero">
 
@@ -1245,10 +1470,6 @@
 </section>
 
 
-<!-- =========================
-     HOW CIVICFIX WORKS
-========================= -->
-
 <section class="section">
 
     <h2>
@@ -1259,9 +1480,7 @@
 
         <div class="stat-card">
 
-            <h3>
-                📢
-            </h3>
+            <h3>📢</h3>
 
             <p>
                 Report Problem
@@ -1277,9 +1496,7 @@
 
         <div class="stat-card">
 
-            <h3>
-                🏢
-            </h3>
+            <h3>🏢</h3>
 
             <p>
                 Department Action
@@ -1295,9 +1512,7 @@
 
         <div class="stat-card">
 
-            <h3>
-                👷
-            </h3>
+            <h3>👷</h3>
 
             <p>
                 Worker Assignment
@@ -1313,9 +1528,7 @@
 
         <div class="stat-card">
 
-            <h3>
-                📸
-            </h3>
+            <h3>📸</h3>
 
             <p>
                 Work Proof
@@ -1332,10 +1545,6 @@
 
 </section>
 
-
-<!-- =========================
-     CUSTOMER CARE
-========================= -->
 
 <section class="customer-section">
 
@@ -1415,10 +1624,6 @@
 </section>
 
 
-<!-- =========================
-     CIVIC MESSAGE
-========================= -->
-
 <section class="civic-message">
 
     <h2>
@@ -1437,10 +1642,6 @@
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
     <h3>
@@ -1458,7 +1659,293 @@
 </footer>
 
 
+<!-- ==============================
+     CIVICFIX AI ASSISTANT
+============================== -->
+
+<div
+    id="civicAiButton"
+    onclick="toggleCivicAI()"
+    title="Open CivicFix AI"
+>
+    🤖
+</div>
+
+
+<div id="civicAiChat">
+
+    <div class="ai-header">
+
+        <div>
+
+            <strong>
+                🤖 CivicFix AI
+            </strong>
+
+            <small>
+                Free Local AI Assistant
+            </small>
+
+        </div>
+
+        <button
+            onclick="toggleCivicAI()"
+            aria-label="Close AI"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <div
+        id="aiMessages"
+        class="ai-messages"
+    >
+
+        <div class="ai-message bot">
+
+            Vanakkam! 👋
+
+            Naan CivicFix AI Assistant.
+
+            Ungal civic problem enna?
+            Sollunga.
+
+        </div>
+
+    </div>
+
+
+    <div class="ai-input-area">
+
+        <input
+            type="text"
+            id="aiInput"
+            placeholder="Type your civic problem..."
+            autocomplete="off"
+        >
+
+        <button
+            onclick="sendCivicAI()"
+            aria-label="Send message"
+        >
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==============================
+       CIVICFIX AI
+       RENDER FASTAPI BACKEND
+    ============================== */
+
+    const CIVIC_AI_API =
+        "https://civicfix-backend-ef93.onrender.com";
+
+
+    function toggleCivicAI() {
+
+        const chat =
+            document.getElementById("civicAiChat");
+
+
+        if (chat.style.display === "flex") {
+
+            chat.style.display = "none";
+
+        } else {
+
+            chat.style.display = "flex";
+
+
+            setTimeout(() => {
+
+                document
+                    .getElementById("aiInput")
+                    .focus();
+
+            }, 100);
+
+        }
+
+    }
+
+
+    async function sendCivicAI() {
+
+        const input =
+            document.getElementById("aiInput");
+
+
+        const messages =
+            document.getElementById("aiMessages");
+
+
+        const message =
+            input.value.trim();
+
+
+        if (!message) {
+            return;
+        }
+
+
+        /* USER MESSAGE */
+
+        const userMessage =
+            document.createElement("div");
+
+
+        userMessage.className =
+            "ai-message user";
+
+
+        userMessage.textContent =
+            message;
+
+
+        messages.appendChild(
+            userMessage
+        );
+
+
+        input.value = "";
+
+
+        /* THINKING MESSAGE */
+
+        const loadingMessage =
+            document.createElement("div");
+
+
+        loadingMessage.className =
+            "ai-message bot";
+
+
+        loadingMessage.textContent =
+            "🤖 Thinking...";
+
+
+        messages.appendChild(
+            loadingMessage
+        );
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        try {
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "message",
+                message
+            );
+
+
+            const response =
+                await fetch(
+                    `${CIVIC_AI_API}/ai-chat`,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "AI server error"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            loadingMessage.remove();
+
+
+            /* AI RESPONSE */
+
+            const botMessage =
+                document.createElement("div");
+
+
+            botMessage.className =
+                "ai-message bot";
+
+
+            botMessage.textContent =
+                data.reply ||
+                "Sorry, I couldn't generate a response.";
+
+
+            messages.appendChild(
+                botMessage
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "CivicFix AI Error:",
+                error
+            );
+
+
+            loadingMessage.textContent =
+                "Sorry 😔 AI service temporarily unavailable.\n\n" +
+                "Please try again later.";
+
+        }
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+    }
+
+
+    /* ==============================
+       ENTER KEY SUPPORT
+    ============================== */
+
+    document
+        .getElementById("aiInput")
+        .addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    sendCivicAI();
+
+                }
+
+            }
+        );
+
+</script>
+
+
 </body>
 
 </html>
-```
