@@ -1,13 +1,24 @@
 from fastapi import FastAPI, Form, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+
 import sqlite3
 import os
+
+import ollama
+
+
+# =========================================================
+# FASTAPI APP
+# =========================================================
 
 app = FastAPI()
 
 
+# =========================================================
 # CORS
+# =========================================================
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -17,7 +28,10 @@ app.add_middleware(
 )
 
 
+# =========================================================
 # UPLOADS FOLDER
+# =========================================================
+
 os.makedirs("uploads", exist_ok=True)
 
 app.mount(
@@ -27,8 +41,12 @@ app.mount(
 )
 
 
+# =========================================================
 # DATABASE
+# =========================================================
+
 def create_database():
+
     connection = sqlite3.connect("civic.db")
     cursor = connection.cursor()
 
@@ -44,21 +62,29 @@ def create_database():
 
     # Worker column
     try:
+
         cursor.execute("""
             ALTER TABLE complaints
             ADD COLUMN worker TEXT
         """)
+
     except sqlite3.OperationalError:
+
         pass
+
 
     # After-work photo column
     try:
+
         cursor.execute("""
             ALTER TABLE complaints
             ADD COLUMN after_photo TEXT
         """)
+
     except sqlite3.OperationalError:
+
         pass
+
 
     connection.commit()
     connection.close()
@@ -67,14 +93,22 @@ def create_database():
 create_database()
 
 
+# =========================================================
+# HOME
+# =========================================================
+
 @app.get("/")
 def home():
+
     return {
         "message": "Smart Civic Complaint System Backend is Working!"
     }
 
 
+# =========================================================
 # CREATE COMPLAINT
+# =========================================================
+
 @app.post("/complaints")
 def create_complaint(
     category: str = Form(...),
@@ -113,7 +147,10 @@ def create_complaint(
     }
 
 
+# =========================================================
 # GET ALL COMPLAINTS
+# =========================================================
+
 @app.get("/complaints")
 def get_complaints():
 
@@ -153,7 +190,10 @@ def get_complaints():
     return result
 
 
+# =========================================================
 # UPDATE COMPLAINT STATUS
+# =========================================================
+
 @app.put("/complaints/{complaint_id}/status")
 def update_status(
     complaint_id: int,
@@ -182,7 +222,10 @@ def update_status(
     }
 
 
+# =========================================================
 # ASSIGN WORKER
+# =========================================================
+
 @app.put("/complaints/{complaint_id}/worker")
 def assign_worker(
     complaint_id: int,
@@ -211,7 +254,10 @@ def assign_worker(
     }
 
 
+# =========================================================
 # UPLOAD AFTER-WORK PHOTO
+# =========================================================
+
 @app.put("/complaints/{complaint_id}/after-photo")
 async def upload_after_photo(
     complaint_id: int,
@@ -230,7 +276,9 @@ async def upload_after_photo(
     contents = await photo.read()
 
     with open(file_path, "wb") as file:
+
         file.write(contents)
+
 
     connection = sqlite3.connect("civic.db")
     cursor = connection.cursor()
@@ -253,3 +301,116 @@ async def upload_after_photo(
         "after_photo": filename,
         "photo_url": f"/uploads/{filename}"
     }
+
+
+# =========================================================
+# CIVICFIX AI ASSISTANT - OLLAMA
+# =========================================================
+
+@app.post("/ai-chat")
+def ai_chat(
+    message: str = Form(...)
+):
+
+    if not message.strip():
+
+        return {
+            "reply": "Please type your question."
+        }
+
+
+    try:
+
+        response = ollama.chat(
+
+            model="llama3.2:3b",
+
+            messages=[
+                {
+                    "role": "system",
+
+                    "content": """
+You are CivicFix AI Assistant.
+
+CivicFix is a Smart Civic Complaint & Action Tracking System.
+
+Your main job is to help citizens with civic complaints.
+
+Available complaint categories:
+
+1. Road Damage
+2. Drainage Leakage
+3. Garbage Dump
+4. Waterlogging
+5. Street Light Problem
+6. Public Toilet - No Water
+7. Public Toilet - No Electricity
+8. Public Toilet - Blockage
+9. Unclean Public Toilet
+10. Open Manhole
+11. Dead Animal Removal
+
+
+Department mapping:
+
+Road Damage -> Engineering Department
+
+Drainage Leakage -> Drainage Department
+
+Garbage Dump -> Sanitation Department
+
+Waterlogging -> Drainage Department
+
+Street Light Problem -> Electrical Department
+
+Public Toilet - No Water -> Water Supply Department
+
+Public Toilet - No Electricity -> Electrical Department
+
+Public Toilet - Blockage -> Sanitation Department
+
+Unclean Public Toilet -> Sanitation Department
+
+Open Manhole -> Drainage Department
+
+Dead Animal Removal -> Sanitation Department
+
+
+IMPORTANT RULES:
+
+- Help citizens understand their civic problem.
+- If a citizen describes a problem, identify the most suitable CivicFix category.
+- Tell the citizen which department normally handles that category.
+- Respond in English, Tamil, or Tanglish according to the user's language.
+- Keep answers short, simple and friendly.
+- Never invent a complaint ID.
+- Never claim that a complaint was submitted.
+- Never invent a worker name.
+- Never invent a complaint status.
+- If the user wants to submit a complaint, tell them to use the CivicFix Report Problem page.
+- If the user wants to check a complaint, tell them to use the CivicFix Track Complaint page.
+- If the user asks something unrelated to CivicFix, politely explain that you mainly help with CivicFix civic complaints.
+- Never request passwords, API keys, bank details or other sensitive information.
+"""
+                },
+
+                {
+                    "role": "user",
+                    "content": message
+                }
+            ]
+        )
+
+
+        return {
+            "reply": response["message"]["content"]
+        }
+
+
+    except Exception as error:
+
+        print("OLLAMA AI ERROR:", error)
+
+        return {
+            "reply": "CivicFix AI is currently unavailable. Please make sure Ollama is running."
+        }
